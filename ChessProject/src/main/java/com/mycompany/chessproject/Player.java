@@ -9,6 +9,8 @@ package com.mycompany.chessproject;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+
 public class Player {
     
 }
