@@ -7,7 +7,7 @@ package com.mycompany.chessproject;
 
 /**
  *
- * @author enesk
+ * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
 public class Move {
     
