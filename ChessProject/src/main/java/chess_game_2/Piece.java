@@ -5,22 +5,13 @@
  */
 package chess_game_2;
 
+
+
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public enum PieceTypes
-{
-    BLACKQUEEN,
-    BLACKKING,
-    BLACKROOK,
-    BLACKBISHOP,
-    BLACKKNIGHT,
-    BLACKPAWN,
-    WHITEQUEEN,
-    WHITEKING,
-    WHITEROOK,
-    WHITEBISHOP,
-    WHITEKNIGHT,
-    WHITEPAWN,
+public abstract class Piece {
+
+  
 }

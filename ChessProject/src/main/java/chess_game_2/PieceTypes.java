@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess_game_2;
+package chess_game.Pieces;
 
 /**
  *
