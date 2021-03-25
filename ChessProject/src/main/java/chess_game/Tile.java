@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.chessproject;
+package chess_game;
+
+import chess_game.Pieces.Piece;
 
 /**
  *

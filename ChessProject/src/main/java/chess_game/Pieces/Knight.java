@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.chessproject;
+package chess_game.Pieces;
 
+import chess_game.Board;
+import chess_game.Tile;
 import javax.swing.JLabel;
 
 /**
