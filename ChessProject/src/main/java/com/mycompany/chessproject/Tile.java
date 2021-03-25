@@ -44,4 +44,8 @@ public class Tile {
     public void setY(int y) {
         this.y = y;
     }
+    public boolean hasPiece()
+    {
+     return this.piece == null;
+    }
 }
