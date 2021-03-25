@@ -3,24 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess_game.Pieces;
+package chess_game_2;
 
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public enum PieceTypes
-{
-    BLACKQUEEN,
-    BLACKKING,
-    BLACKROOK,
-    BLACKBISHOP,
-    BLACKKNIGHT,
-    BLACKPAWN,
-    WHITEQUEEN,
-    WHITEKING,
-    WHITEROOK,
-    WHITEBISHOP,
-    WHITEKNIGHT,
-    WHITEPAWN,
+public enum MoveType {
+    UP,
+    DOWN,
+    RIGHT,
+    LEFT,
+    UPRIGHTCROSS,
+    UPLEFTCROSS,
+    DOWNRIGHTCROSS,
+    DOWNLEFTCROSS,
+    
+            
 }
