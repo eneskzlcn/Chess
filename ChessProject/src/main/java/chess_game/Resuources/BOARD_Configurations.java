@@ -3,21 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess_game_2;
+package chess_game.Resuources;
 
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public enum MoveType {
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT,
-    UPRIGHTCROSS,
-    UPLEFTCROSS,
-    DOWNRIGHTCROSS,
-    DOWNLEFTCROSS,
+public class BOARD_Configurations {
     
-            
+    public static int ROW_COUNT = 8;
+    public static int ROW_TILE_COUNT = 8;
 }
