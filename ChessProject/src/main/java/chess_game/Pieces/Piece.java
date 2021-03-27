@@ -6,7 +6,9 @@
 package chess_game.Pieces;
 
 import chess_game.Board;
+import chess_game.Move;
 import chess_game.Tile;
+import java.util.List;
 
 /**
  *
@@ -39,4 +41,6 @@ public abstract class Piece {
 
     public abstract boolean canMove(Board board,
             Tile start, Tile end);
+    
+    public abstract List<Move> availableMoves(Board board);
 }

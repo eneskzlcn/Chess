@@ -5,19 +5,10 @@
  */
 package chess_game.Pieces;
 
-import chess_game.Board;
-import chess_game.Move;
-import chess_game.Tile;
-import java.util.ArrayList;
-import java.util.List;
-import chess_game.Resuources.PIECE_Configurations;
-
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-
-public class Knight extends Piece{
+public class Move {
     
-  
 }
