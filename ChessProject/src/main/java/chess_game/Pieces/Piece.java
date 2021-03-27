@@ -15,18 +15,18 @@ import chess_game.Tile;
 public abstract class Piece {
 
     private boolean killed = false;
-    private boolean white = false;
+    private Team team;
 
-    public Piece(boolean white) {
-        this.setWhite(white);
+    public Piece(Team team) {
+        this.setTeam(team);
     }
 
-    public boolean isWhite() {
-        return this.white;
+    public Team getTeam() {
+        return this.team;
     }
 
-    public void setWhite(boolean white) {
-        this.white = white;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public boolean isKilled() {

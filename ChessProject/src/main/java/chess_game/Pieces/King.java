@@ -24,14 +24,14 @@ public class King extends Piece{
     {
        this.castlingDone = castlingDone;
     }
-    public King(boolean white)
+    public King(Team team)
     {
-        super(white);
+        super(team);
     }
     
     @Override
     public boolean canMove(Board board, Tile start, Tile end) {
-         if (end.getPiece().isWhite() == this.isWhite()) {
+         if (end.getPiece().getTeam() == this.getTeam()) {
             return false;
         }
   
