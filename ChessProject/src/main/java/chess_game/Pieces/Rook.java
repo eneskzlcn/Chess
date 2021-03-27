@@ -7,26 +7,20 @@ package chess_game.Pieces;
 
 import chess_game.Board;
 import chess_game.Tile;
-import javax.swing.JLabel;
 
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+public class Rook extends Piece{
 
-public class Knight extends Piece{
-    
-    public Knight(Team team)
+    public Rook(Team team)
     {
-         super(team);   
-    } 
-
+        super(team);
+    }
     @Override
     public boolean canMove(Board board, Tile start, Tile end) {
-        
-        if (end.getPiece().getTeam() == this.getTeam()) {
-            return false;
-        }
-        return true;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }
