@@ -6,9 +6,9 @@
 package chess_game.Pieces;
 
 import chess_game.*;
-import chess_game.Board;
-import chess_game.Move;
-import chess_game.Tile;
+import chess_game.Boards.Board;
+import chess_game.Pieces.Move;
+import chess_game.Boards.Tile;
 import java.util.List;
 
 /**
@@ -29,35 +29,7 @@ public class King extends Piece{
     }
     public King(Team team)
     {
-        super(team);
-    }
-    
-    @Override
-    public boolean canMove(Board board, Tile start, Tile end) {
-         if (end.getPiece().getTeam() == this.getTeam()) {
-            return false;
-        }
-  
-        int x = Math.abs(start.getCoordinate().getX()- end.getCoordinate().getX());
-        int y = Math.abs(start.getCoordinate().getY() - end.getCoordinate().getY());
-        if (x + y == 1) {
-            // x+y ==1 is just enough to control can a piece go anywhere with distance 1.
-            // The conditions especially for the King like is any enemy will able to attack after move need to be controlled here.
-            return true;
-        }
-  
-        return this.isValidCastling(board, start, end);
-
-    }
-    private boolean isValidCastling(Board board, Tile start, Tile end)
-    {
-  
-        if (this.isCastlingDone()) {
-            return false;
-        }
-  
-        // Will be added conditions for castling that makes castling impossible. If none of them accepted then will return true
-        return true;
+        super(team,PieceTypes.KING);
     }
 
     @Override

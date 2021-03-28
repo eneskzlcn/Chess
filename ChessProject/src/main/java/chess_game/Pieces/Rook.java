@@ -5,9 +5,9 @@
  */
 package chess_game.Pieces;
 
-import chess_game.Board;
-import chess_game.Move;
-import chess_game.Tile;
+import chess_game.Boards.Board;
+import chess_game.Pieces.Move;
+import chess_game.Boards.Tile;
 import java.util.List;
 
 /**
@@ -18,13 +18,9 @@ public class Rook extends Piece{
 
     public Rook(Team team)
     {
-        super(team);
+        super(team,PieceTypes.ROOK);
     }
-    @Override
-    public boolean canMove(Board board, Tile start, Tile end) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public List<Move> availableMoves(Board board) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -12,43 +12,37 @@ import java.util.List;
 import chess_game.Resources.PIECE_Configurations;
 import java.util.Set;
 import chess_game.Utilities.BoardUtilities;
+
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public class Bishop extends Piece{
-    
-    public Bishop(Team team, PieceTypes pieceType)
-    {
-        super(team,pieceType);
+public class Bishop extends Piece {
+
+    public Bishop(Team team) {
+        super(team, PieceTypes.BISHOP);
     }
-    
-    
-    @Override
+
     public List<Move> availableMoves(Board board) {
         List<Move> possibleMoves = new ArrayList<Move>();
-        Coordinate currentCoordinate = board.getCoordOfGivenTeamPiece(this.getTeam(),this.getType());
-        
+        Coordinate currentCoordinate = board.getCoordOfGivenTeamPiece(this.getTeam(), this.getType());
+
         Tile destinationTile;
         Coordinate destinationCoordinate = currentCoordinate;
-        for(Coordinate coord: PIECE_Configurations.BISHOP_MOVES)
-        {
-            do{
-                destinationCoordinate.setX(coord.getX()+destinationCoordinate.getX());
-                destinationCoordinate.setY(coord.getY()+ destinationCoordinate.getY());
+        for (Coordinate coord : PIECE_Configurations.BISHOP_MOVES) {
+            do {
+                destinationCoordinate.setX(coord.getX() + destinationCoordinate.getX());
+                destinationCoordinate.setY(coord.getY() + destinationCoordinate.getY());
                 destinationTile = board.getTile(destinationCoordinate);
-                
-                if(!board.getTile(destinationCoordinate).hasPiece())
-                {
-                    possibleMoves.add(new Move(board,board.getTileOfGivenTeamPiece(this.getTeam(),this.getType()),destinationTile));
-                }
-                if(board.getTile(destinationCoordinate).getPiece().getTeam() != this.getTeam())
-                {
-                  possibleMoves.add(new Move(board,board.getTileOfGivenTeamPiece(this.getTeam(),this.getType()),destinationTile));
 
+                if (!board.getTile(destinationCoordinate).hasPiece()) {
+                    possibleMoves.add(new Move(board, board.getTileOfGivenTeamPiece(this.getTeam(), this.getType()), destinationTile));
                 }
-            }
-            while(BoardUtilities.isValidCoordinate(destinationCoordinate));
+                if (board.getTile(destinationCoordinate).getPiece().getTeam() != this.getTeam()) {
+                    possibleMoves.add(new Move(board, board.getTileOfGivenTeamPiece(this.getTeam(), this.getType()), destinationTile));
+                    break;
+                }
+            } while (BoardUtilities.isValidCoordinate(destinationCoordinate));
             destinationCoordinate = currentCoordinate;
         }
         return null;

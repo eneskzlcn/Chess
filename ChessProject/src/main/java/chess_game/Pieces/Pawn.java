@@ -5,9 +5,9 @@
  */
 package chess_game.Pieces;
 
-import chess_game.Board;
-import chess_game.Move;
-import chess_game.Tile;
+import chess_game.Boards.Board;
+import chess_game.Pieces.Move;
+import chess_game.Boards.Tile;
 import java.util.List;
 
 /**
@@ -18,11 +18,7 @@ public class Pawn extends Piece{
 
     public Pawn(Team team)
     {
-      super(team);
-    }
-    @Override
-    public boolean canMove(Board board, Tile start, Tile end) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      super(team,PieceTypes.PAWN);
     }
 
     @Override
