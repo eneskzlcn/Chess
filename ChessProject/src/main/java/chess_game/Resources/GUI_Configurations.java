@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess_game.Resuources;
+package chess_game.Resources;
 
 import java.awt.Dimension;
 
