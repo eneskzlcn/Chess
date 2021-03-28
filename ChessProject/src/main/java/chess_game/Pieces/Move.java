@@ -5,10 +5,28 @@
  */
 package chess_game.Pieces;
 
+import chess_game.Boards.Board;
+import chess_game.Boards.Tile;
+
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
 public class Move {
-    
+
+    Board board;
+    Tile currentTile;
+    Tile destinationTile;
+    Piece movedPiece;
+    Piece killedPiece;
+
+    public Move(Board board, Tile currentTile, Tile destinationTile) {
+        this.board = board;
+        this.currentTile = currentTile;
+        this.destinationTile = destinationTile;
+        this.movedPiece = currentTile.getPiece();
+        if (destinationTile.hasPiece()) {
+            killedPiece = destinationTile.getPiece();
+        }
+    }
 }
