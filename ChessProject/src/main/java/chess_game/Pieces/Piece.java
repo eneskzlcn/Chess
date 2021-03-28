@@ -5,9 +5,8 @@
  */
 package chess_game.Pieces;
 
-import chess_game.Board;
-import chess_game.Move;
-import chess_game.Tile;
+import chess_game.Boards.Board;
+import chess_game.Boards.Tile;
 import java.util.List;
 
 /**
@@ -18,9 +17,19 @@ public abstract class Piece {
 
     private boolean killed = false;
     private Team team;
-
-    public Piece(Team team) {
+    private PieceTypes type;
+    
+    public Piece(Team team,PieceTypes type) {
         this.setTeam(team);
+        this.setType(type);
+    }
+
+    public PieceTypes getType() {
+        return type;
+    }
+
+    public void setType(PieceTypes type) {
+        this.type = type;
     }
 
     public Team getTeam() {
@@ -38,9 +47,6 @@ public abstract class Piece {
     public void setKilled(boolean killed) {
         this.killed = killed;
     }
-
-    public abstract boolean canMove(Board board,
-            Tile start, Tile end);
-    
     public abstract List<Move> availableMoves(Board board);
+      
 }

@@ -16,5 +16,6 @@ public enum PieceTypes
     ROOK,
     BISHOP,
     KNIGHT,
-    PAWN
+    PAWN,
+    EMPTY
 }
