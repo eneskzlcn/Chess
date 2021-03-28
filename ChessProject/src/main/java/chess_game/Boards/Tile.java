@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess_game;
+package chess_game.Boards;
 
 import chess_game.Pieces.Coordinate;
 import chess_game.Pieces.Piece;
@@ -48,4 +48,5 @@ public class Tile {
     {
         return this.piece == null;
     }
+    
 }
