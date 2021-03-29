@@ -23,7 +23,7 @@ public class Bishop extends Piece {
         super(team, PieceTypes.BISHOP);
     }
 
-    public List<Move> availableMoves(Board board) {
+    public List<Move> availableMoves(Board board,Coordinate currentCoord) {
         List<Move> possibleMoves = new ArrayList<Move>();
         Coordinate currentCoordinate = board.getCoordOfGivenTeamPiece(this.getTeam(), this.getType());
 

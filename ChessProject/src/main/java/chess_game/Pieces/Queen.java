@@ -22,7 +22,7 @@ public class Queen extends Piece {
     }
   
     @Override
-    public List<Move> availableMoves(Board board) {
+    public List<Move> availableMoves(Board board, Coordinate currentCoordinate) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

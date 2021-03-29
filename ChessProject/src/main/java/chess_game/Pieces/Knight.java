@@ -24,11 +24,10 @@ public class Knight extends Piece {
     }
 
     @Override
-    public List<Move> availableMoves(Board board) {
+    public List<Move> availableMoves(Board board, Coordinate currentCoord) {
 
         List<Move> possibleMoves = new ArrayList<Move>();
 
-        Coordinate currentCoord = board.getCoordOfGivenTeamPiece(this.getTeam(), this.getType());
 
         Coordinate destinationCoordinate = new Coordinate(0, 0);
         Tile destinationTile;
@@ -46,7 +45,7 @@ public class Knight extends Piece {
                 possibleMoves.add(new Move(board,board.getTileOfGivenTeamPiece(this.getTeam(), this.getType()),destinationTile));
             } else {
                 if (destinationTile.getPiece().getTeam() != this.getTeam()) {
-                    possibleMoves.add(new Move(board,board.getTileOfGivenTeamPiece(this.getTeam(), this.getType()),destinationTile));
+                    possibleMoves.add(new Move(board,board.getTile(currentCoord),destinationTile));
                 }
             }
         }

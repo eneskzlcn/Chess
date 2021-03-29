@@ -47,6 +47,12 @@ public abstract class Piece {
     public void setKilled(boolean killed) {
         this.killed = killed;
     }
-    public abstract List<Move> availableMoves(Board board);
+
+    @Override
+    public String toString() {
+        return this.team.toString()+" "+this.type.toString();
+    }
+    
+    public abstract List<Move> availableMoves(Board board,Coordinate currentCoord);
       
 }
