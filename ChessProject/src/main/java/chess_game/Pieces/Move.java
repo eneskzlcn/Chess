@@ -29,4 +29,45 @@ public class Move {
             killedPiece = destinationTile.getPiece();
         }
     }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public Tile getCurrentTile() {
+        return currentTile;
+    }
+
+    public void setCurrentTile(Tile currentTile) {
+        this.currentTile = currentTile;
+    }
+
+    public Tile getDestinationTile() {
+        return destinationTile;
+    }
+
+    public void setDestinationTile(Tile destinationTile) {
+        this.destinationTile = destinationTile;
+    }
+
+    public Piece getMovedPiece() {
+        return movedPiece;
+    }
+
+    public void setMovedPiece(Piece movedPiece) {
+        this.movedPiece = movedPiece;
+    }
+
+    public Piece getKilledPiece() {
+        return killedPiece;
+    }
+
+    public void setKilledPiece(Piece killedPiece) {
+        this.killedPiece = killedPiece;
+    }
+
 }
