@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -29,27 +30,28 @@ public class BOARD_Configurations {
     public static int TILE_SIZE = 60;
     public static Color creamColor = new Color(255, 229, 204);
     public static Color lightCyanColor = new Color(204, 255, 255);
-
+    public static Color greenColor = new Color(51,255,51);
     public static ImageIcon getImageOfTeamPiece(Team team, PieceTypes pieceType) {
-
-        String imagePath = "../images/";
+        
+        if(team == null || pieceType == null)return null;
+        String imagePath = "C:\\Users\\enesk\\bilgisayar_aglari\\Chess\\ChessProject\\src\\main\\java\\chess_game\\Img\\";
         if (team == Team.BLACK) {
             imagePath += "black";
         } else {
             imagePath += "white";
         }
         if (pieceType == PieceTypes.BISHOP) {
-            imagePath = "_bishop.png";
+            imagePath += "_bishop.png";
         } else if (pieceType == PieceTypes.KING) {
-            imagePath = "_king.png";
+            imagePath += "_king.png";
         } else if (pieceType == PieceTypes.QUEEN) {
-            imagePath = "_queen.png";
+            imagePath += "_queen.png";
         } else if (pieceType == PieceTypes.KNIGHT) {
-            imagePath = "_knight.png";
+            imagePath += "_knight.png";
         } else if (pieceType == PieceTypes.PAWN) {
-            imagePath = "_pawn.png";
+            imagePath += "_pawn.png";
         } else if (pieceType == PieceTypes.ROOK) {
-            imagePath = "_rook.png";
+            imagePath += "_rook.png";
         }
         try {
             File img = new File(imagePath);
