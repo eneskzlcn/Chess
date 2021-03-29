@@ -35,6 +35,23 @@ public class Table {
         return gameFrame;
     }
 
+    public BoardPanel getBoardPanel() {
+        return boardPanel;
+    }
+
+    public void setBoardPanel(BoardPanel boardPanel) {
+        this.boardPanel = boardPanel;
+    }
+
+    public Board getChessBoard() {
+        return chessBoard;
+    }
+
+    public void setChessBoard(Board chessBoard) {
+        this.chessBoard = chessBoard;
+    }
+    
+    
     public void setGameFrame(JFrame gameFrame) {
         this.gameFrame = gameFrame;
     }
