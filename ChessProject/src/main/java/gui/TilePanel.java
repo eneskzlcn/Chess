@@ -8,55 +8,127 @@ package gui;
 import chess_game.Boards.Board;
 import chess_game.Boards.Tile;
 import chess_game.Pieces.Coordinate;
+import chess_game.Pieces.Move;
+import chess_game.Pieces.Piece;
 import chess_game.Pieces.PieceTypes;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import chess_game.Resources.BOARD_Configurations;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.List;
 import javax.swing.JLabel;
+
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public class TilePanel extends JPanel{
-    
+public class TilePanel extends JPanel {
+
     Coordinate coordinate;
-    public TilePanel(BoardPanel boardPanel,Coordinate coordinate,Board chessBoard)
-    {
+    private boolean isChosen = false;
+
+    public TilePanel(BoardPanel boardPanel, Coordinate coord, Board chessBoard) {
         super(new GridBagLayout());
-        this.coordinate = coordinate;
-        setPreferredSize(new Dimension(BOARD_Configurations.TILE_SIZE,BOARD_Configurations.TILE_SIZE));
+        this.coordinate = coord;
+        setPreferredSize(new Dimension(BOARD_Configurations.TILE_SIZE, BOARD_Configurations.TILE_SIZE));
         assignTileColor();
         assignTilePieceIcon(chessBoard);
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!isChosen) {
+                    isChosen = true;
+                    for (int row = 0; row < boardPanel.getBoardTiles().length; row++) {
+                        for (int col = 0; col < boardPanel.getBoardTiles()[row].length; col++) {
+                             if(boardPanel.getBoardTiles()[row][col].isIsChosen())
+                             {
+                                boardPanel.getBoardTiles()[row][col].setIsChosen(false);
+                                boardPanel.getBoardTiles()[row][col].assignTileColor();
+                             }
+                        }
+                    }
+                }
+
+                if (!chessBoard.getTile(coordinate).hasPiece()) {
+                    return;
+                }
+                Piece chosenPiece = chessBoard.getTile(coordinate).getPiece();
+                List<Move> availableMoves = chosenPiece.availableMoves(chessBoard, coordinate);
+                if (availableMoves.isEmpty()) {
+                    return;
+                }
+                for (Move move : availableMoves) {
+                    Coordinate destinationCoord = move.getDestinationTile().getCoordinate();
+                    System.out.println(destinationCoord.toString());
+                    TilePanel destinationTilePanel = boardPanel.getBoardTiles()[destinationCoord.getY()][destinationCoord.getX()];
+                    destinationTilePanel.setBackground(BOARD_Configurations.greenColor);
+                }
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
         validate();
     }
-    private void assignTilePieceIcon(Board board)
-    {
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public boolean isIsChosen() {
+        return isChosen;
+    }
+
+    public void setIsChosen(boolean isChosen) {
+        this.isChosen = isChosen;
+        assignTileColor();
+        validate();
+    }
+
+    private void assignTilePieceIcon(Board board) {
         this.removeAll();
         Tile thisTile = board.getTile(this.coordinate);
-        if(thisTile == null)return;
-        if(thisTile.hasPiece())
-        {
-            this.add(new JLabel(BOARD_Configurations.getImageOfTeamPiece(thisTile.getPiece().getTeam(), thisTile.getPiece().getType())));
+        if (thisTile == null) {
+            System.out.println("Tile is null");
+            return;
+        }
+        if (thisTile.hasPiece()) {
+            JLabel jlabel = new JLabel(BOARD_Configurations.getImageOfTeamPiece(thisTile.getPiece().getTeam(), thisTile.getPiece().getType()));
+            jlabel.setName(TOOL_TIP_TEXT_KEY);
+            this.add(jlabel);
         }
     }
+
     private void assignTileColor() {
-        if(this.coordinate.getX() % 2 == 0 && this.coordinate.getY() % 2 == 0)
-        {
+        if (this.coordinate.getX() % 2 == 0 && this.coordinate.getY() % 2 == 0) {
             this.setBackground(BOARD_Configurations.creamColor);
-        }
-        else if(this.coordinate.getX() % 2 == 0 && this.coordinate.getY() % 2 == 1)
-        {
+        } else if (this.coordinate.getX() % 2 == 0 && this.coordinate.getY() % 2 == 1) {
             this.setBackground(BOARD_Configurations.lightCyanColor);
-        }
-        else if (this.coordinate.getX() % 2 == 1 && this.coordinate.getY() % 2 == 0)
-        {
+        } else if (this.coordinate.getX() % 2 == 1 && this.coordinate.getY() % 2 == 0) {
             this.setBackground(BOARD_Configurations.lightCyanColor);
-        }
-        else if (this.coordinate.getX() % 2 == 1 && this.coordinate.getY() % 2 == 1)
-        {
+        } else if (this.coordinate.getX() % 2 == 1 && this.coordinate.getY() % 2 == 1) {
             this.setBackground(BOARD_Configurations.creamColor);
         }
     }
-  
+
 }
