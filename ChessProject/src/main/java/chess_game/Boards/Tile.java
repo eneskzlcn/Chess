@@ -46,7 +46,13 @@ public class Tile {
     }
     public boolean hasPiece()
     {
-        return this.piece == null;
+        return this.piece != null;
     }
+
+    @Override
+    public String toString() {
+        return coordinate.toString() + " Piece "+ ((hasPiece() ? piece.toString() : "Empty"));
+    }
+    
     
 }
