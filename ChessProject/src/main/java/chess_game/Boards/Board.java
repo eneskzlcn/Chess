@@ -31,7 +31,6 @@ public class Board {
         return blackPlayer;
     }
 
-   
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -44,10 +43,27 @@ public class Board {
         return chosenTile;
     }
 
-    public void setChosenTile(Tile chosenTile) {
-        this.chosenTile = chosenTile;
+    public boolean hasChosenTile() {
+        boolean hasChosen = false;
+        if(chosenTile == null)
+        {
+            return false;
+        }
+        if(chosenTile.getPiece() == null)
+        {
+            return false;   
+        }
+        return true;
     }
-    
+
+    public void setChosenTile(Tile chosenTile) {
+        if (!chosenTile.hasPiece()) {
+            this.chosenTile = null;
+        } else {
+            this.chosenTile = chosenTile;
+        }
+    }
+
     public Tile getTile(Coordinate coordinate) {
         return getTile(coordinate.getX(), coordinate.getY());
     }
@@ -58,7 +74,7 @@ public class Board {
         blackPlayer = new Player(Team.BLACK);
         currentPlayer = whitePlayer;
         tiles = BoardUtilities.createStandartBoardTiles();
-        
+
     }
 
     public Tile getTile(int x, int y) {
@@ -82,17 +98,15 @@ public class Board {
         }
         return null;
     }
-    public void changeCurrentPlayer()
-    {
-        if(currentPlayer == whitePlayer)
-        {
+
+    public void changeCurrentPlayer() {
+        if (currentPlayer == whitePlayer) {
             currentPlayer = blackPlayer;
-        }
-        else
-        {
+        } else {
             currentPlayer = whitePlayer;
         }
     }
+
     public Tile getTileOfGivenTeamPiece(Team team, PieceTypes pieceType) {
         for (int i = 0; i < BOARD_Configurations.ROW_COUNT; i++) {
             for (int j = 0; j < BOARD_Configurations.ROW_TILE_COUNT; j++) {
