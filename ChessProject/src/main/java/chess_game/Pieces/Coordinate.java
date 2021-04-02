@@ -40,5 +40,10 @@ public class Coordinate {
     {
         return "[X:"+x +", Y:"+y+"]";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (((Coordinate)obj).getX() == this.x && ((Coordinate)obj).getY() == this.y); 
+    }
     
 }
