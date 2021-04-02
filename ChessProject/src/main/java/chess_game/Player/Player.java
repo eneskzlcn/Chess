@@ -33,6 +33,9 @@ public class Player {
     
     public void makeMove(Board board, Move move)
     {
-        
+        board.getTile(move.getDestinationTile().getCoordinate()).setPiece(move.getCurrentTile().getPiece());
+        board.getTile(move.getCurrentTile().getCoordinate()).setPiece(null);
+        System.out.println(board.getTile(move.getCurrentTile().getCoordinate()).getPiece());
+        System.out.println(board.getTile(move.getDestinationTile().getCoordinate()).getPiece());
     }
 }
