@@ -10,8 +10,8 @@ import chess_game.Pieces.Coordinate;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import chess_game.Resources.BOARD_Configurations;
+import chess_game.Resources.PIECE_Configurations;
 import java.awt.Color;
-import java.awt.Event;
 import java.awt.GridLayout;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -36,7 +36,7 @@ public class BoardPanel extends JPanel {
 
         }
     }
-
+ 
     public TilePanel[][] getBoardTiles() {
         return boardTiles;
     }

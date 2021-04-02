@@ -14,11 +14,15 @@ import chess_game.Pieces.PieceTypes;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import chess_game.Resources.BOARD_Configurations;
+import chess_game.Utilities.BoardUtilities;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 /**
  *
@@ -38,33 +42,7 @@ public class TilePanel extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (!isChosen) {
-                    isChosen = true;
-                    for (int row = 0; row < boardPanel.getBoardTiles().length; row++) {
-                        for (int col = 0; col < boardPanel.getBoardTiles()[row].length; col++) {
-                             if(boardPanel.getBoardTiles()[row][col].isIsChosen())
-                             {
-                                boardPanel.getBoardTiles()[row][col].setIsChosen(false);
-                                boardPanel.getBoardTiles()[row][col].assignTileColor();
-                             }
-                        }
-                    }
-                }
-
-                if (!chessBoard.getTile(coordinate).hasPiece()) {
-                    return;
-                }
-                Piece chosenPiece = chessBoard.getTile(coordinate).getPiece();
-                List<Move> availableMoves = chosenPiece.availableMoves(chessBoard, coordinate);
-                if (availableMoves.isEmpty()) {
-                    return;
-                }
-                for (Move move : availableMoves) {
-                    Coordinate destinationCoord = move.getDestinationTile().getCoordinate();
-                    System.out.println(destinationCoord.toString());
-                    TilePanel destinationTilePanel = boardPanel.getBoardTiles()[destinationCoord.getY()][destinationCoord.getX()];
-                    destinationTilePanel.setBackground(BOARD_Configurations.greenColor);
-                }
+               
 
             }
 
@@ -113,7 +91,7 @@ public class TilePanel extends JPanel {
             return;
         }
         if (thisTile.hasPiece()) {
-            JLabel jlabel = new JLabel(BOARD_Configurations.getImageOfTeamPiece(thisTile.getPiece().getTeam(), thisTile.getPiece().getType()));
+            JLabel jlabel = new JLabel(BoardUtilities.getImageOfTeamPiece(thisTile.getPiece().getTeam(), thisTile.getPiece().getType()));
             jlabel.setName(TOOL_TIP_TEXT_KEY);
             this.add(jlabel);
         }
@@ -129,6 +107,7 @@ public class TilePanel extends JPanel {
         } else if (this.coordinate.getX() % 2 == 1 && this.coordinate.getY() % 2 == 1) {
             this.setBackground(BOARD_Configurations.creamColor);
         }
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
 
 }
