@@ -6,9 +6,14 @@
 package gui;
 
 import chess_game.Boards.Board;
+import chess_game.Pieces.PieceTypes;
+import chess_game.Pieces.Team;
+import chess_game.Resources.BOARD_Configurations;
 import chess_game.Resources.GUI_Configurations;
+import chess_game.Resources.PIECE_Configurations;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
@@ -18,6 +23,7 @@ public class Table {
     private JFrame gameFrame;
     private BoardPanel boardPanel;
     private Board chessBoard;
+  
     
     public Table()
     {
@@ -29,6 +35,7 @@ public class Table {
         this.gameFrame.add(boardPanel);
         this.gameFrame.add(this.boardPanel,BorderLayout.CENTER);
         this.gameFrame.setVisible(true);
+       
     }
 
     public JFrame getGameFrame() {

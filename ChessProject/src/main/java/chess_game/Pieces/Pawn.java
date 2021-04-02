@@ -14,6 +14,7 @@ import java.util.List;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
 public class Pawn extends Piece{
 
     public Pawn(Team team)
