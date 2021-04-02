@@ -28,27 +28,28 @@ public class BoardUtilities {
 
     public static ImageIcon getImageOfTeamPiece(Team team, PieceTypes pieceType) {
 
-        if (team == null || pieceType == null) {
-            return null;
-        }
         String imagePath = "C:\\Users\\enesk\\bilgisayar_aglari\\Chess\\ChessProject\\src\\main\\java\\chess_game\\Img\\";
-        if (team == Team.BLACK) {
-            imagePath += "black";
+        if (team == null || pieceType == null) {
+            imagePath += "transparent.png";
         } else {
-            imagePath += "white";
-        }
-        if (pieceType == PieceTypes.BISHOP) {
-            imagePath += "_bishop.png";
-        } else if (pieceType == PieceTypes.KING) {
-            imagePath += "_king.png";
-        } else if (pieceType == PieceTypes.QUEEN) {
-            imagePath += "_queen.png";
-        } else if (pieceType == PieceTypes.KNIGHT) {
-            imagePath += "_knight.png";
-        } else if (pieceType == PieceTypes.PAWN) {
-            imagePath += "_pawn.png";
-        } else if (pieceType == PieceTypes.ROOK) {
-            imagePath += "_rook.png";
+            if (team == Team.BLACK) {
+                imagePath += "black";
+            } else {
+                imagePath += "white";
+            }
+            if (pieceType == PieceTypes.BISHOP) {
+                imagePath += "_bishop.png";
+            } else if (pieceType == PieceTypes.KING) {
+                imagePath += "_king.png";
+            } else if (pieceType == PieceTypes.QUEEN) {
+                imagePath += "_queen.png";
+            } else if (pieceType == PieceTypes.KNIGHT) {
+                imagePath += "_knight.png";
+            } else if (pieceType == PieceTypes.PAWN) {
+                imagePath += "_pawn.png";
+            } else if (pieceType == PieceTypes.ROOK) {
+                imagePath += "_rook.png";
+            }
         }
         try {
             File img = new File(imagePath);
