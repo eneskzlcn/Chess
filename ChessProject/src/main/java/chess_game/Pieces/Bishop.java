@@ -25,7 +25,6 @@ public class Bishop extends Piece {
 
     public List<Move> availableMoves(Board board, Coordinate currentCoord) {
         List<Move> possibleMoves = new ArrayList<Move>();
-        Coordinate currentCoordinate = board.getCoordOfGivenTeamPiece(this.getTeam(), this.getType());
         Tile currentTile = board.getTile(currentCoord);
         Tile destinationTile;
         Coordinate destinationCoordinate;
