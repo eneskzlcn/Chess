@@ -8,23 +8,65 @@ package chess_game.Pieces;
 import chess_game.Boards.Board;
 import chess_game.Pieces.Move;
 import chess_game.Boards.Tile;
+import java.util.ArrayList;
 import java.util.List;
+import chess_game.Resources.PIECE_Configurations;
+import chess_game.Utilities.BoardUtilities;
 
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+public class Pawn extends Piece {
 
-public class Pawn extends Piece{
-
-    public Pawn(Team team)
-    {
-      super(team,PieceTypes.PAWN);
+    public Pawn(Team team) {
+        super(team, PieceTypes.PAWN);
     }
 
     @Override
-    public List<Move> availableMoves(Board board,Coordinate currrentCoord) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Move> availableMoves(Board board, Coordinate currentCoord) {
+        List<Move> possibleMoves = new ArrayList<Move>();
+        Tile currentTile = board.getTile(currentCoord);
+        Tile destinationTile;
+        for (Coordinate coord : (Coordinate[]) PIECE_Configurations.PAWN_MOVES.get(this.getTeam()).get("Normal")) {
+            if (!BoardUtilities.isValidCoordinate(currentCoord.plus(coord))) {
+                continue;
+            }
+            destinationTile = board.getTile(currentCoord.plus(coord));
+            if (!destinationTile.hasPiece()) {
+                possibleMoves.add(new Move(board, currentTile, destinationTile));
+            }
+            //not need to else state. becuse if there is a piece in any team on pawn it cant moves.             
+        }
+        if (currentTile.getCoordinate().getY() == PIECE_Configurations.getPawnStartPosY(this.getTeam())) {
+            for (Coordinate coord : (Coordinate[]) PIECE_Configurations.PAWN_MOVES.get(this.getTeam()).get("Start")) {
+                if (!BoardUtilities.isValidCoordinate(currentCoord.plus(coord))) {
+                    continue;
+                }
+                destinationTile = board.getTile(currentCoord.plus(coord));
+                if (!destinationTile.hasPiece()) {
+                    possibleMoves.add(new Move(board, currentTile, destinationTile));
+                }
+
+            }
+        }
+        for (Coordinate coord : (Coordinate[]) PIECE_Configurations.PAWN_MOVES.get(this.getTeam()).get("Attack")) {
+            
+            if (!BoardUtilities.isValidCoordinate(currentCoord.plus(coord))) {
+                continue;
+            }
+            destinationTile = board.getTile(currentCoord.plus(coord));
+
+            if (!destinationTile.hasPiece()) {
+                continue;
+            } else {
+                if (destinationTile.getPiece().getTeam() != this.getTeam()) {
+                    possibleMoves.add(new Move(board, currentTile, destinationTile));
+                }
+            }
+        }
+
+        return possibleMoves;
     }
-    
+
 }
