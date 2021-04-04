@@ -23,29 +23,30 @@ public class Bishop extends Piece {
         super(team, PieceTypes.BISHOP);
     }
 
-    public List<Move> availableMoves(Board board,Coordinate currentCoord) {
+    public List<Move> availableMoves(Board board, Coordinate currentCoord) {
         List<Move> possibleMoves = new ArrayList<Move>();
         Coordinate currentCoordinate = board.getCoordOfGivenTeamPiece(this.getTeam(), this.getType());
-
+        Tile currentTile = board.getTile(currentCoord);
         Tile destinationTile;
-        Coordinate destinationCoordinate = currentCoordinate;
+        Coordinate destinationCoordinate;
         for (Coordinate coord : PIECE_Configurations.BISHOP_MOVES) {
-            do {
-                destinationCoordinate.setX(coord.getX() + destinationCoordinate.getX());
-                destinationCoordinate.setY(coord.getY() + destinationCoordinate.getY());
+            destinationCoordinate = currentCoord;
+            while (BoardUtilities.isValidCoordinate(destinationCoordinate.plus(coord))) {
+                destinationCoordinate = destinationCoordinate.plus(coord);
                 destinationTile = board.getTile(destinationCoordinate);
-
-                if (!board.getTile(destinationCoordinate).hasPiece()) {
-                    possibleMoves.add(new Move(board, board.getTileOfGivenTeamPiece(this.getTeam(), this.getType()), destinationTile));
+                if (!destinationTile.hasPiece()) {
+                    possibleMoves.add(new Move(board, currentTile, destinationTile));
+                } else {
+                    if (destinationTile.getPiece().getTeam() != this.getTeam()) {
+                        possibleMoves.add(new Move(board, currentTile, destinationTile));
+                        break;
+                    } else {
+                        break;
+                    }
                 }
-                if (board.getTile(destinationCoordinate).getPiece().getTeam() != this.getTeam()) {
-                    possibleMoves.add(new Move(board, board.getTileOfGivenTeamPiece(this.getTeam(), this.getType()), destinationTile));
-                    break;
-                }
-            } while (BoardUtilities.isValidCoordinate(destinationCoordinate));
-            destinationCoordinate = currentCoordinate;
+            }
         }
-        return null;
+        return possibleMoves;
     }
 
 }
