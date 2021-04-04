@@ -23,6 +23,12 @@ public class PIECE_Configurations {
     //this coordinates shows a bishops available move directions from its current position;
     public static Coordinate[] BISHOP_MOVES = {new Coordinate(1,1),new Coordinate(-1,1),new Coordinate(1,-1),new Coordinate(-1,-1)};
     
+    //this coordinates shows a roooks available move directions from its current position;
+    public static Coordinate[] ROOK_MOVES = {new Coordinate(0,1),new Coordinate(0,-1),new Coordinate(1,0),new Coordinate(-1,0)};
+    
+     //this coordinates shows a queens available move directions from its current position;
+    public static Coordinate[] QUUEN_MOVES = {new Coordinate(0,1),new Coordinate(0,-1),new Coordinate(1,0),new Coordinate(-1,0),new Coordinate(1,1),new Coordinate(-1,1),new Coordinate(1,-1),new Coordinate(-1,-1)};
+    
     //this coordinates shows a black pawns available movement directions from its current position
     public static Coordinate[] BLACK_PAWN_NORMAL_MOVES = {new Coordinate(0,1)};
     
