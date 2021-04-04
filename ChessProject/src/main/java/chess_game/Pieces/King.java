@@ -9,32 +9,55 @@ import chess_game.*;
 import chess_game.Boards.Board;
 import chess_game.Pieces.Move;
 import chess_game.Boards.Tile;
+import chess_game.Resources.PIECE_Configurations;
+import chess_game.Utilities.BoardUtilities;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public class King extends Piece{
-    
+public class King extends Piece {
+
     private boolean castlingDone = false;
-    
-    public boolean isCastlingDone()
-    {
-            return castlingDone;
+
+    public boolean isCastlingDone() {
+        return castlingDone;
     }
-    public void setCastlingDone(boolean castlingDone)
-    {
-       this.castlingDone = castlingDone;
+
+    public void setCastlingDone(boolean castlingDone) {
+        this.castlingDone = castlingDone;
     }
-    public King(Team team)
-    {
-        super(team,PieceTypes.KING);
+
+    public King(Team team) {
+        super(team, PieceTypes.KING);
     }
 
     @Override
-    public List<Move> availableMoves(Board board,Coordinate currentCoordinate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Move> availableMoves(Board board, Coordinate currentCoord) {
+        List<Move> possibleMoves = new ArrayList<Move>();
+        Tile currentTile = board.getTile(currentCoord);
+        Tile destinationTile;
+        Coordinate destinationCoordinate;
+        for (Coordinate coord : PIECE_Configurations.QUUEN_MOVES) {
+            destinationCoordinate = currentCoord.plus(coord);
+            if(!BoardUtilities.isValidCoordinate(destinationCoordinate))
+            {
+                continue;
+            }
+            destinationTile = board.getTile(destinationCoordinate);
+            if (!destinationTile.hasPiece()) {
+                possibleMoves.add(new Move(board, currentTile, destinationTile));
+            } else {
+                if (destinationTile.getPiece().getTeam() != this.getTeam()) {
+                    possibleMoves.add(new Move(board, currentTile, destinationTile));
+                }
+            }
+        }
+
+        return possibleMoves;
+
     }
-  
+
 }
