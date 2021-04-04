@@ -29,20 +29,17 @@ public class Knight extends Piece {
         List<Move> possibleMoves = new ArrayList<Move>();
 
 
-        Coordinate destinationCoordinate = new Coordinate(0, 0);
         Tile destinationTile;
 
         for (Coordinate coord : PIECE_Configurations.KNIGHT_MOVES) {
-            destinationCoordinate.setX(currentCoord.getX() + coord.getX());
-            destinationCoordinate.setY(currentCoord.getY() + coord.getY());
-
-            if (!BoardUtilities.isValidCoordinate(destinationCoordinate)) {
+ 
+            if (!BoardUtilities.isValidCoordinate(currentCoord.plus(coord))) {
                 continue; // chech if the coord outside of board.
             }
-            destinationTile = board.getTile(destinationCoordinate);
+            destinationTile = board.getTile(currentCoord.plus(coord));
 
             if (!destinationTile.hasPiece()) {
-                possibleMoves.add(new Move(board,board.getTileOfGivenTeamPiece(this.getTeam(), this.getType()),destinationTile));
+                possibleMoves.add(new Move(board,board.getTile(currentCoord),destinationTile));
             } else {
                 if (destinationTile.getPiece().getTeam() != this.getTeam()) {
                     possibleMoves.add(new Move(board,board.getTile(currentCoord),destinationTile));
