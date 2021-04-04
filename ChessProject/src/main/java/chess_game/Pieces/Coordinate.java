@@ -46,4 +46,9 @@ public class Coordinate {
         return (((Coordinate)obj).getX() == this.x && ((Coordinate)obj).getY() == this.y); 
     }
     
+    public Coordinate plus(Coordinate coord)
+    {
+        return new Coordinate(this.x + coord.getX(),this.y+coord.getY());
+    }
+    
 }
