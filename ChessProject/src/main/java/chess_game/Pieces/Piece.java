@@ -16,10 +16,10 @@ import java.util.List;
 public abstract class Piece {
 
     private boolean killed = false;
-    private Team team;
+    private Team team; // Every piece in a team, black or white.
     private PieceTypes type;
-    
-    public Piece(Team team,PieceTypes type) {
+
+    public Piece(Team team, PieceTypes type) {
         this.setTeam(team);
         this.setType(type);
     }
@@ -50,9 +50,10 @@ public abstract class Piece {
 
     @Override
     public String toString() {
-        return this.team.toString()+" "+this.type.toString();
+        return this.team.toString() + " " + this.type.toString();
     }
-    
-    public abstract List<Move> availableMoves(Board board,Coordinate currentCoord);
-      
+
+    // This function calculates available moves of the piece on a given board and coordinate.
+    public abstract List<Move> availableMoves(Board board, Coordinate currentCoord);
+
 }

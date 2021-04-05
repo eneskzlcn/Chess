@@ -28,6 +28,8 @@ public class Pawn extends Piece {
         List<Move> possibleMoves = new ArrayList<Move>();
         Tile currentTile = board.getTile(currentCoord);
         Tile destinationTile;
+
+        //normal available moves calculating. Movement of 1 length on y or -y axis.
         for (Coordinate coord : (Coordinate[]) PIECE_Configurations.PAWN_MOVES.get(this.getTeam()).get("Normal")) {
             if (!BoardUtilities.isValidCoordinate(currentCoord.plus(coord))) {
                 continue;
@@ -51,7 +53,7 @@ public class Pawn extends Piece {
             }
         }
         for (Coordinate coord : (Coordinate[]) PIECE_Configurations.PAWN_MOVES.get(this.getTeam()).get("Attack")) {
-            
+
             if (!BoardUtilities.isValidCoordinate(currentCoord.plus(coord))) {
                 continue;
             }

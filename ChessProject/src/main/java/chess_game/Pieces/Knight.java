@@ -22,12 +22,11 @@ public class Knight extends Piece {
     public Knight(Team team) {
         super(team, PieceTypes.KNIGHT);
     }
-
+    
     @Override
     public List<Move> availableMoves(Board board, Coordinate currentCoord) {
 
         List<Move> possibleMoves = new ArrayList<Move>();
-
 
         Tile destinationTile;
 
