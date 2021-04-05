@@ -14,6 +14,7 @@ import chess_game.Pieces.PieceTypes;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import chess_game.Resources.BOARD_Configurations;
+import chess_game.Resources.GUI_Configurations;
 import chess_game.Utilities.BoardUtilities;
 import chess_game.Utilities.MoveUtilities;
 import java.awt.Color;
@@ -115,13 +116,13 @@ public class TilePanel extends JPanel {
     public void assignTileColor(Board board) {
 
         if (this.coordinate.getX() % 2 == 0 && this.coordinate.getY() % 2 == 0) {
-            this.setBackground(BOARD_Configurations.creamColor);
+            this.setBackground(GUI_Configurations.creamColor);
         } else if (this.coordinate.getX() % 2 == 0 && this.coordinate.getY() % 2 == 1) {
-            this.setBackground(BOARD_Configurations.lightCyanColor);
+            this.setBackground(GUI_Configurations.lightCyanColor);
         } else if (this.coordinate.getX() % 2 == 1 && this.coordinate.getY() % 2 == 0) {
-            this.setBackground(BOARD_Configurations.lightCyanColor);
+            this.setBackground(GUI_Configurations.lightCyanColor);
         } else if (this.coordinate.getX() % 2 == 1 && this.coordinate.getY() % 2 == 1) {
-            this.setBackground(BOARD_Configurations.creamColor);
+            this.setBackground(GUI_Configurations.creamColor);
         }
         if (board.hasChosenTile()) {
             if (this.coordinate.equals(board.getChosenTile().getCoordinate())) {
