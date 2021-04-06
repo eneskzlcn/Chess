@@ -27,5 +27,8 @@ public class GUI_Configurations {
     public static int MainMenuAlignment = FlowLayout.CENTER;
     public static int MainMenuHorizantalGAP = SCREEN_WIDTH;
     public static int MainMenuVerticalGAP = 50;
+    public static int BottomGameMenuHorizontalGap = 50;
+    public static int BottomGameMenuVerticalGap = SCREEN_HEIGHT;
+    public static int BottomGameMenuAlignment = FlowLayout.LEADING;
 
 }

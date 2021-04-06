@@ -5,6 +5,7 @@
  */
 
 
+import chess_game.Boards.Board;
 import chess_game.Resources.GUI_Configurations;
 import chess_game.Pieces.King;
 import chess_game.Pieces.PieceTypes;
@@ -13,7 +14,10 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 import gui.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  *
@@ -23,6 +27,10 @@ public class Test {
     public static void main(String[] args) {
         
             Table table = new Table();
-              
+//            JFrame j = new JFrame("asdas");
+//            MainMenu m = new MainMenu();
+//            j.add(m);
+//            j.setVisible(true); 
+            
     }
 }
