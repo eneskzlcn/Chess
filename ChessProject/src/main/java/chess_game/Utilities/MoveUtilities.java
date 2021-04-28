@@ -31,14 +31,11 @@ public class MoveUtilities {
         return false;
     }
 
-    public static boolean controlCheckState(Board board, Team team, Coordinate currentCoord) {
+    public static boolean controlCheckState(Board board, Team team) {
 
-        //control is there a knight as a danger for king ( check stete),
-        //control is there a bishop, queen, etc. ( check danger from cross way)
-        //control is there a rooks, queen etc. (check danger from straight way)
-        
         Tile destinationTile;
-
+        Coordinate currentCoord = board.getCoordOfGivenTeamPiece(team, PieceTypes.KING);
+        //control is there a knight as a danger for king ( check state),
         for (Coordinate coord : PIECE_Configurations.KNIGHT_MOVES) {
 
             if (!BoardUtilities.isValidCoordinate(currentCoord.plus(coord))) {
@@ -54,6 +51,9 @@ public class MoveUtilities {
                 }
             }
         }
+        
+        //control is there a rooks, queen etc. (check danger from straight way)
+        
         Tile currentTile = board.getTile(currentCoord);
         Coordinate destinationCoordinate;
         for (Coordinate coord : PIECE_Configurations.ROOK_MOVES) {
@@ -64,15 +64,52 @@ public class MoveUtilities {
                 if (!destinationTile.hasPiece()) {
                     continue;
                 } else {
-                    if(destinationTile.getPiece().getTeam()== team)
-                    {
+                    if (destinationTile.getPiece().getTeam() == team) {
                         break;
                     }
-                    if (destinationTile.getPiece().getTeam() != team && (destinationTile.getPiece().getType() == PieceTypes.ROOK ||destinationTile.getPiece().getType() == PieceTypes.QUEEN )) {
+                    if (destinationTile.getPiece().getTeam() != team && (destinationTile.getPiece().getType() == PieceTypes.ROOK || destinationTile.getPiece().getType() == PieceTypes.QUEEN)) {
                         return true;
                     } else {
                         break;
                     }
+                }
+            }
+        }
+        //control is there a bishop, queen ( check danger from cross way)
+        for (Coordinate coord : PIECE_Configurations.BISHOP_MOVES) {
+            destinationCoordinate = currentCoord;
+            while (BoardUtilities.isValidCoordinate(destinationCoordinate.plus(coord))) {
+                destinationCoordinate = destinationCoordinate.plus(coord);
+                destinationTile = board.getTile(destinationCoordinate);
+                if (!destinationTile.hasPiece()) {
+                    continue;
+                } else {
+                    if (destinationTile.getPiece().getTeam() == team) {
+                        break;
+                    }
+                    if (destinationTile.getPiece().getTeam() != team && (destinationTile.getPiece().getType() == PieceTypes.BISHOP || destinationTile.getPiece().getType() == PieceTypes.QUEEN)) {
+                        return true;
+
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+        
+        // control is there a pawn that able to attack king nearby. 
+        for (Coordinate coord : (Coordinate[]) PIECE_Configurations.PAWN_MOVES.get(team).get("Attack")) {
+
+            if (!BoardUtilities.isValidCoordinate(currentCoord.plus(coord))) {
+                continue;
+            }
+            destinationTile = board.getTile(currentCoord.plus(coord));
+
+            if (!destinationTile.hasPiece()) {
+                continue;
+            } else {
+                if (destinationTile.getPiece().getTeam() != team && destinationTile.getPiece().getType() == PieceTypes.PAWN) {
+                    return true;
                 }
             }
         }
