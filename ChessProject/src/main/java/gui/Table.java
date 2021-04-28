@@ -30,15 +30,14 @@ public class Table {
     private BoardPanel boardPanel;
     private Board chessBoard;
     private MainMenu mainMenu;
-    private BottomGameMenu bottomGameMenu;
-        
+    private InGameBottomMenu bottomGameMenu;
+
     public Table() {
         this.gameFrame = new JFrame("Chess");
         this.gameFrame.setLayout(new BorderLayout());
         this.gameFrame.setSize(GUI_Configurations.OUTER_FRAME_DIMENSION);
         this.mainMenu = new MainMenu();
         createMainMenu();
-        //this.gameFrame.add(mainMenu);
         this.gameFrame.setVisible(true);
 
     }
@@ -66,31 +65,30 @@ public class Table {
     public void setGameFrame(JFrame gameFrame) {
         this.gameFrame = gameFrame;
     }
-    
-    public void createMainMenu()
-    {
+
+    public void createMainMenu() {
         //this.gameFrame.removeAll();
-        
-        this.mainMenu.settingsButton.addActionListener(new ActionListener() {
+
+        this.mainMenu.getSettingsBTN().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 createGamePanel();
-                System.out.println("yeasags");
             }
         });
-        this.gameFrame.add(mainMenu,BorderLayout.CENTER);
+        this.gameFrame.add(mainMenu, BorderLayout.CENTER);
     }
-    public void createGamePanel()
-    {
+
+    public void createGamePanel() {
         this.gameFrame.remove(mainMenu);
         this.chessBoard = new Board();
         this.boardPanel = new BoardPanel(this.chessBoard);
-        this.bottomGameMenu = new BottomGameMenu();
+        this.bottomGameMenu = new InGameBottomMenu();
         this.gameFrame.add(boardPanel);
-        //this.gameFrame.add(this.boardPanel, BorderLayout.CENTER);
-        //this.gameFrame.add(this.bottomGameMenu,BorderLayout.PAGE_END);
+        this.gameFrame.add(this.boardPanel, BorderLayout.CENTER);
+        this.gameFrame.add(this.bottomGameMenu, BorderLayout.PAGE_END);
+
         this.gameFrame.setVisible(true);
-        
+
     }
 }

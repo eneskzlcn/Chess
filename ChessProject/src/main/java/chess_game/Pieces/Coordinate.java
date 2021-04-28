@@ -50,5 +50,4 @@ public class Coordinate {
     {
         return new Coordinate(this.x + coord.getX(),this.y+coord.getY());
     }
-    
 }
