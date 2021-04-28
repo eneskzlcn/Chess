@@ -11,6 +11,7 @@ import chess_game.Pieces.Coordinate;
 import chess_game.Pieces.Move;
 import chess_game.Pieces.Piece;
 import chess_game.Pieces.PieceTypes;
+import chess_game.Pieces.Team;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import chess_game.Resources.BOARD_Configurations;
@@ -54,9 +55,18 @@ public class TilePanel extends JPanel {
                     Tile destinationTile = chessBoard.getTile(coordinate); // if there is already a chosen piece then this tile will be destinatin place
                     if (MoveUtilities.isValidMove(chessBoard, destinationTile)) {
                         chessBoard.getCurrentPlayer().makeMove(chessBoard, new Move(chessBoard, chessBoard.getChosenTile(), destinationTile));
+                        
                     } else {
                         chessBoard.setChosenTile(destinationTile);
 
+                    }
+                    if(MoveUtilities.controlCheckState(chessBoard, Team.BLACK))
+                        {
+                            System.out.println("Check state for team:"+Team.BLACK.toString());
+                        }
+                    else if(MoveUtilities.controlCheckState(chessBoard, Team.WHITE))
+                    {
+                        System.out.println("Check state for team:"+Team.WHITE.toString());
                     }
                 }
                 boardPanel.updateBoardGUI(chessBoard);
