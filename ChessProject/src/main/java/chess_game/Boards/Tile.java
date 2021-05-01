@@ -12,7 +12,7 @@ import chess_game.Pieces.Piece;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public class Tile {
+public class Tile implements java.io.Serializable{
 
     private Piece piece;
     private Coordinate coordinate;

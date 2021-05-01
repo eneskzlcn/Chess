@@ -9,7 +9,7 @@ package chess_game.Pieces;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public class Coordinate { 
+public class Coordinate implements java.io.Serializable{ 
     private int x;
     private int y;
     

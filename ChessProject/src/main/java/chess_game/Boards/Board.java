@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public class Board {
+public class Board implements java.io.Serializable{
 
     private final Tile[][] tiles;
     private Player whitePlayer;
