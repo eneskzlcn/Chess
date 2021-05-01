@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package Server;
 
+import Messages.Message;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -24,6 +25,8 @@ public class SClient {
     public ClientListenThread clientListenThread;
     public SClient pair;
     public boolean isPaired;
+    public boolean isWantToPair = false;
+    public ClientPairingThread pairingThread;
     
     public SClient(Socket socket) {
 
@@ -32,22 +35,20 @@ public class SClient {
             this.cOutput = new ObjectOutputStream(this.socket.getOutputStream());
             this.cInput = new ObjectInputStream(this.socket.getInputStream());
             this.clientListenThread = new ClientListenThread(this);
+            this.pairingThread = new ClientPairingThread(this);
             this.isPaired = false;
         } catch (IOException ex) {
             Logger.getLogger(SClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void SendMessage(Object msg) {
-        if (this.socket.isConnected()) {
-            try {
-                cOutput.writeObject(msg);
-            } catch (IOException ex) {
-                System.out.println("There is an error occured when sending message");
-            }
+    public void Send(Object msg)
+    {
+        try {
+            this.cOutput.writeObject(msg);
+        } catch (IOException ex) {
+            Logger.getLogger(SClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     public void Listen() {
         this.clientListenThread.start();
     }
