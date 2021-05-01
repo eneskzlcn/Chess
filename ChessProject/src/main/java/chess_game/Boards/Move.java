@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chess_game.Pieces;
+package chess_game.Boards;
 
 import chess_game.Boards.Board;
 import chess_game.Boards.Tile;
+import chess_game.Pieces.Piece;
 
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public class Move {
+public class Move implements java.io.Serializable{
 
     Board board;
     Tile currentTile;
