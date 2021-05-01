@@ -5,6 +5,7 @@
  */
 package chess_game.Pieces;
 
+import chess_game.Move.Move;
 import chess_game.Boards.Board;
 import chess_game.Boards.Tile;
 import java.util.ArrayList;

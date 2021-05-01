@@ -8,7 +8,7 @@ package chess_game.Utilities;
 import chess_game.Boards.Board;
 import chess_game.Boards.Tile;
 import chess_game.Pieces.Coordinate;
-import chess_game.Pieces.Move;
+import chess_game.Move.Move;
 import chess_game.Pieces.PieceTypes;
 import chess_game.Pieces.Team;
 import chess_game.Resources.PIECE_Configurations;

@@ -5,6 +5,7 @@
  */
 package chess_game.Pieces;
 
+import chess_game.Move.Move;
 import chess_game.Boards.Board;
 import chess_game.Boards.Tile;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public abstract class Piece {
+public abstract class Piece implements java.io.Serializable{
 
     private boolean killed = false;
     private Team team; // Every piece in a team, black or white.

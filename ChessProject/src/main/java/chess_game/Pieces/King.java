@@ -5,9 +5,9 @@
  */
 package chess_game.Pieces;
 
-import chess_game.*;
+
 import chess_game.Boards.Board;
-import chess_game.Pieces.Move;
+import chess_game.Move.Move;
 import chess_game.Boards.Tile;
 import chess_game.Resources.PIECE_Configurations;
 import chess_game.Utilities.BoardUtilities;
