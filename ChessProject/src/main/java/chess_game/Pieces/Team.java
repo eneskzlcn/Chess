@@ -9,7 +9,7 @@ package chess_game.Pieces;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public enum Team {
+public enum Team implements java.io.Serializable{
     WHITE,
-    BLACK
+    BLACK,NOCOLOR
 }

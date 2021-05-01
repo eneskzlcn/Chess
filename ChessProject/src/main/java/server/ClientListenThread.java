@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package server;
+package Server;
 
+import Messages.Message;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -27,8 +28,16 @@ public class ClientListenThread extends Thread {
         while (!this.client.socket.isClosed()) {
             
             try {
-                Object msg = this.client.cInput.readObject();
-                System.out.println(msg.toString());
+                Message msg = (Message)(this.client.cInput.readObject());
+                if(msg.type == Message.MessageTypes.PAIRING)
+                {
+                    this.client.isWantToPair = true;
+                    this.client.pairingThread.start();
+                }
+                if(msg.type == Message.MessageTypes.MOVE)
+                {
+                    this.client.pair.Send(msg);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(ClientListenThread.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

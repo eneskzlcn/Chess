@@ -5,6 +5,7 @@
  */
 package chess_game.Player;
 
+import chess_game.Move.Move;
 import chess_game.Boards.Board;
 import chess_game.Pieces.*;
 
@@ -14,7 +15,7 @@ import chess_game.Pieces.*;
  */
 
 
-public class Player {
+public class Player implements java.io.Serializable{
     
     private Team team;
     
@@ -35,7 +36,6 @@ public class Player {
     {
         board.getTile(move.getDestinationTile().getCoordinate()).setPiece(move.getCurrentTile().getPiece());
         board.getTile(move.getCurrentTile().getCoordinate()).setPiece(null);
-        System.out.println(board.getTile(move.getCurrentTile().getCoordinate()).getPiece());
-        System.out.println(board.getTile(move.getDestinationTile().getCoordinate()).getPiece());
+   
     }
 }

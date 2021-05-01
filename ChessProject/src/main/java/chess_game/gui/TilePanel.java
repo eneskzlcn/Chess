@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package chess_game.gui;
 
+import ClientSide.Client;
+import Messages.Message;
 import chess_game.Boards.Board;
 import chess_game.Boards.Tile;
 import chess_game.Pieces.Coordinate;
-import chess_game.Pieces.Move;
+import chess_game.Move.Move;
 import chess_game.Pieces.Piece;
 import chess_game.Pieces.PieceTypes;
 import chess_game.Pieces.Team;
@@ -36,7 +38,7 @@ public class TilePanel extends JPanel {
     Coordinate coordinate;
     JLabel pieceIcon;
 
-    public TilePanel(BoardPanel boardPanel, Coordinate coord, Board chessBoard) {
+    public TilePanel(BoardPanel boardPanel, Coordinate coord, Board chessBoard,Client client) {
         super(new GridBagLayout());
         this.coordinate = coord;
         pieceIcon = new JLabel();
@@ -47,14 +49,22 @@ public class TilePanel extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                if(client.getTeam() != chessBoard.getCurrentPlayer().getTeam())
+                {
+                    return;
+                }
                 if (!chessBoard.hasChosenTile()) { // if there is no chosen piece . Then make this piece chosen...
                     chessBoard.setChosenTile(chessBoard.getTile(coordinate));
 
                 } else {
                     Tile destinationTile = chessBoard.getTile(coordinate); // if there is already a chosen piece then this tile will be destinatin place
                     if (MoveUtilities.isValidMove(chessBoard, destinationTile)) {
-                        chessBoard.getCurrentPlayer().makeMove(chessBoard, new Move(chessBoard, chessBoard.getChosenTile(), destinationTile));
+                        Move move = new Move(chessBoard,chessBoard.getChosenTile(),destinationTile);
+                        chessBoard.getCurrentPlayer().makeMove(chessBoard, move);
+                        Message movementMessage = new Message(Message.MessageTypes.MOVE);
+                        movementMessage.messageContent = (Object)(move);
+                        client.Send(movementMessage);
+                        chessBoard.changeCurrentPlayer();
                         
                     } else {
                         chessBoard.setChosenTile(destinationTile);
