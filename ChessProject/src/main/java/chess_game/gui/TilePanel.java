@@ -65,6 +65,10 @@ public class TilePanel extends JPanel {
                     if (MoveUtilities.isValidMove(chessBoard, destinationTile)) {
                         Move move = new Move(chessBoard, chessBoard.getChosenTile(), destinationTile);
                         chessBoard.getCurrentPlayer().makeMove(chessBoard, move);
+                        if(move.hasKilledPiece())
+                        {
+                            client.game.getBottomGameMenu().killedPiecesListModel.addElement(move.getKilledPiece().toString());
+                        }
                         //the time when we send move class directly we using this code.
 //                        Message movementMessage = new Message(Message.MessageTypes.MOVE);
 //                        movementMessage.messageContent = (Object) (move);
