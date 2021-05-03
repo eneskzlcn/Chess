@@ -7,8 +7,6 @@ package Server;
 
 import Messages.Message;
 import chess_game.Pieces.Team;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -42,7 +40,7 @@ public class ClientPairingThread extends Thread {
                         if (client != this.client && client.isPaired == false && client.isWantToPair == true) {
                             //matching objects and making client pairs to play each other.
                             chosenPair = client;
-                            this.client.pair = chosenPair;
+                            this.client.pair = client;
                             client.pair = this.client;
                             this.client.isWantToPair = false;
                             client.isWantToPair = false;    
