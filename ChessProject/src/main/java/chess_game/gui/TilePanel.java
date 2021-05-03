@@ -12,8 +12,6 @@ import chess_game.Boards.Board;
 import chess_game.Boards.Tile;
 import chess_game.Pieces.Coordinate;
 import chess_game.Move.Move;
-import chess_game.Pieces.Piece;
-import chess_game.Pieces.PieceTypes;
 import chess_game.Pieces.Team;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
@@ -25,10 +23,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -77,11 +74,10 @@ public class TilePanel extends JPanel {
                         MovementMessage movement = new MovementMessage();
                         movement.currentCoordinate = move.getCurrentTile().getCoordinate();
                         movement.destinationCoordinate = move.getDestinationTile().getCoordinate();
-                        if(move.getKilledPiece() != null)
-                        {
+                        if (move.getKilledPiece() != null) {
                             movement.isPieceKilled = true;
                         }
-                        msg.messageContent = (Object)movement;
+                        msg.messageContent = (Object) movement;
                         client.Send(msg);
                         chessBoard.changeCurrentPlayer();
 
@@ -95,9 +91,20 @@ public class TilePanel extends JPanel {
 
                     }
                     if (MoveUtilities.controlCheckState(chessBoard, Team.BLACK)) {
-                        System.out.println("Check state for team:" + Team.BLACK.toString());
+                        JOptionPane.showMessageDialog(null, "Check state for team : " +  Team.BLACK.toString());
+
+                        //if there is a chech-state. give a check information to client. And also send this same information to rival client
+                        Message msg = new Message(Message.MessageTypes.CHECK);
+                        //the content will be the team which in check state ( in-danger)
+                        msg.messageContent = (Object) Team.BLACK;
+                        client.Send(msg);
                     } else if (MoveUtilities.controlCheckState(chessBoard, Team.WHITE)) {
-                        System.out.println("Check state for team:" + Team.WHITE.toString());
+                        JOptionPane.showMessageDialog(null, "Check state for team : " +  Team.WHITE.toString());
+                        //if there is a chech-state. give a check information to client. And also send this same information to rival client
+                        Message msg = new Message(Message.MessageTypes.CHECK);
+                        //the content will be the team which in check state ( in-danger)
+                        msg.messageContent = (Object) Team.WHITE;
+                        client.Send(msg);
                     }
                 }
                 boardPanel.updateBoardGUI(chessBoard);

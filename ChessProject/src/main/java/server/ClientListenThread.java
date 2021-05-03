@@ -42,6 +42,9 @@ public class ClientListenThread extends Thread {
                     case MOVE:
                         this.client.pair.Send(msg);
                         break;   
+                    case CHECK:
+                        this.client.pair.Send(msg);
+                        break;
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ClientListenThread.class.getName()).log(Level.SEVERE, null, ex);

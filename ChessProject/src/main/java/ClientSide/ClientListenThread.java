@@ -10,8 +10,7 @@ import chess_game.Boards.Board;
 import chess_game.Move.Move;
 import chess_game.Pieces.Team;
 import chess_game.Player.Player;
-import chess_game.gui.MainMenu;
-import java.util.Set;
+import javax.swing.JOptionPane;
 
 /*
   To change this license header, choose License Headers in Project Properties.
@@ -75,7 +74,11 @@ public class ClientListenThread extends Thread {
                         this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
                         board.changeCurrentPlayer();
                         break;
-
+                    case CHECK:
+                        //if any check state comes to client. Write information to the connected menu object.
+                        Team checkStateTeam = (Team) msg.messageContent;
+                        JOptionPane.showMessageDialog(null, "Check state for team: " +checkStateTeam.toString());
+                        break;
                 }
 
             } catch (IOException ex) {
