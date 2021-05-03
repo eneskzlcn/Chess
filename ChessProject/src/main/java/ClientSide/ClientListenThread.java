@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ClientSide.*;
+import Messages.MovementMessage;
+import chess_game.Boards.Board;
 import chess_game.Move.Move;
 import chess_game.Pieces.Team;
 import chess_game.Player.Player;
@@ -17,7 +19,7 @@ import java.util.Set;
   and open the template in the editor.
  */
 
- /* 
+ /* 9
  
   @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
@@ -48,21 +50,36 @@ public class ClientListenThread extends Thread {
                     } else if ((msg.messageContent).equals("White")) {
                         this.client.setTeam(Team.WHITE);
                     }
-                }
-                else if(msg.type == Message.MessageTypes.MOVE)
-                {
-                    Move enemyMove = (Move)(msg.messageContent);
-                    Player player = this.client.game.getChessBoard().getCurrentPlayer();
-                    player.makeMove(this.client.game.getChessBoard(), enemyMove);
-                    //this.client.game.boardPanel.updateBoardGUI(chessBoard);
-                    this.client.game.getChessBoard().changeCurrentPlayer();
+                } else if (msg.type == Message.MessageTypes.MOVE) {
+                    
+                    //when we read move object directly we need to to this changes to make the references true...
+                    
+//                    Move enemyMove = (Move)(msg.messageContent);
+//                    Player player = this.client.game.getChessBoard().getCurrentPlayer();
+//                    enemyMove.setBoard(this.client.game.getChessBoard());
+//                    enemyMove.setCurrentTile(this.client.game.getChessBoard().getTile(enemyMove.getCurrentTile().getCoordinate()));
+//                    enemyMove.setDestinationTile(this.client.game.getChessBoard().getTile(enemyMove.getDestinationTile().getCoordinate()));
+//                    if(enemyMove.getKilledPiece() != null)
+//                    {
+//                        enemyMove.setKilledPiece(this.client.game.getChessBoard().getTile(enemyMove.getDestinationTile().getCoordinate()).getPiece());
+//                    }
+//                    player.makeMove(this.client.game.getChessBoard(), enemyMove);
+//                    this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
+//                    this.client.game.getChessBoard().changeCurrentPlayer();
+                    //when we use the movement message, these part is enough to know what enemy move.
+                    MovementMessage movement = (MovementMessage) msg.messageContent;
+                    Board board = this.client.game.getChessBoard();
+                    Player player = board.getCurrentPlayer();
+                    Move move = new Move(board, board.getTile(movement.currentCoordinate), board.getTile(movement.destinationCoordinate));
+                    player.makeMove(board, move);
+                    this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
+                    board.changeCurrentPlayer();
                 }
 
             } catch (IOException ex) {
                 Logger.getLogger(ClientListenThread.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 System.out.println("Girilen class bulunamadı");
-                //System.out.println("Girilen class bulunamadı. Gönderilen class tipi = 0"+fmsg.getClass().toString());
             }
         }
     }
