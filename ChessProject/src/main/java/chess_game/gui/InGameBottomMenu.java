@@ -25,17 +25,6 @@ public class InGameBottomMenu extends javax.swing.JPanel {
         killedPiecesListModel = new DefaultListModel();
         killedPiecesLIST.setModel(killedPiecesListModel);
     }
-
-    public JButton getBackToMenuBTN() {
-        return backToMenuBTN;
-    }
-
-    public void setBackToMenuBTN(JButton backToMenuBTN) {
-        this.backToMenuBTN = backToMenuBTN;
-    }
-
-    
-
     public JLabel getPlayersColorLBL() {
         return playersColorLBL;
     }
@@ -65,20 +54,11 @@ public class InGameBottomMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        backToMenuBTN = new javax.swing.JButton();
         playersColorLBL = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         killedPiecesLIST = new javax.swing.JList<>();
         turnLBL = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-
-        backToMenuBTN.setForeground(new java.awt.Color(51, 255, 0));
-        backToMenuBTN.setText("Back To Menu");
-        backToMenuBTN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backToMenuBTNActionPerformed(evt);
-            }
-        });
 
         playersColorLBL.setText("You're playing: ");
 
@@ -102,16 +82,9 @@ public class InGameBottomMenu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(playersColorLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(turnLBL)
-                        .addContainerGap(80, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backToMenuBTN)
-                        .addContainerGap())))
+                .addGap(99, 99, 99)
+                .addComponent(turnLBL)
+                .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(94, 94, 94)
                 .addComponent(jLabel2)
@@ -125,25 +98,15 @@ public class InGameBottomMenu extends javax.swing.JPanel {
                     .addComponent(turnLBL)
                     .addComponent(playersColorLBL, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(backToMenuBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backToMenuBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToMenuBTNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_backToMenuBTNActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backToMenuBTN;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> killedPiecesLIST;

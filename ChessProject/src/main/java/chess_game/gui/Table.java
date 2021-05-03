@@ -90,14 +90,7 @@ public class Table {
         {
             this.bottomGameMenu.getTurnLBL().setText("Enemy Turn");
             this.bottomGameMenu.getTurnLBL().setForeground(Color.RED);
-        }
-        this.bottomGameMenu.getBackToMenuBTN().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameFrame.remove(boardPanel);
-                createMainMenu();
-            }
-        });
+        }    
         this.gameFrame.add(boardPanel);
         this.gameFrame.add(this.boardPanel, BorderLayout.CENTER);
         this.gameFrame.add(this.bottomGameMenu, BorderLayout.PAGE_END);
