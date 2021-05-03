@@ -20,11 +20,13 @@ import java.util.logging.Logger;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+//This is a TCP connection based server.
 public class Server {
 
     public ServerSocket socket;
     public int port;
-    public ServerListenThread listenThread;
+    public ListenConnectionRequestThread listenConnectionRequestThread;
     public ClientRemovingControlThread removingControlThread;
     public static ArrayList<SClient> clients;
 
@@ -36,7 +38,7 @@ public class Server {
         try {
             this.port = port;
             this.socket = new ServerSocket(this.port);
-            this.listenThread = new ServerListenThread(this);
+            this.listenConnectionRequestThread = new ListenConnectionRequestThread(this);
             removingControlThread = new ClientRemovingControlThread(this);
             this.clients = new ArrayList<SClient>();
             
@@ -46,9 +48,9 @@ public class Server {
         }
     }
 
-    // starts the listen thread
-    public void Listen() {
-        this.listenThread.start();
+    // starts the acceptance
+    public void ListenClientConnectionRequests() {
+        this.listenConnectionRequestThread.start();
     }
 
     public static void SendMessage(SClient client, Message message) {

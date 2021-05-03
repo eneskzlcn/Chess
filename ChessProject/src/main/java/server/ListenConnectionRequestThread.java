@@ -18,11 +18,15 @@ import java.util.logging.Logger;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public class ServerListenThread extends Thread {
+
+// this thread called by server directly when the server opens and never closes. The purpose of this
+// thread is always waiting for new client connection requests to accept or reject them.
+
+public class ListenConnectionRequestThread extends Thread {
 
     private Server server;
 
-    public ServerListenThread(Server server) {
+    public ListenConnectionRequestThread(Server server) {
         this.server = server;
     }
 
@@ -30,15 +34,13 @@ public class ServerListenThread extends Thread {
     public void run() {
         while (!this.server.socket.isClosed()) {
             try {
-                System.out.println("Listening");
                 Socket nSocket = this.server.socket.accept();
                 SClient nClient = new SClient(nSocket);
                 nClient.Listen();
                 server.clients.add(nClient);
-                //Server.SendMessage(nClient, (Object)(welcomeMessage));
                 
             } catch (IOException ex) {
-                Logger.getLogger(ServerListenThread.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListenConnectionRequestThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

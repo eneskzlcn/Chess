@@ -13,6 +13,11 @@ import java.util.logging.Logger;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+//The purpose of this thread is the pairing every client with its rival in game. Because of the chess game is 1 versus 1 game,
+// the pairing operation just happens between 2 clients. When this thread called by a sclient, it starts to search for a player 
+// which also want to pair with someone. When the pairing completed, this thread gonna stops until this sclient finish or leave
+//its match and start to search a new rival for a new game.
 public class ClientPairingThread extends Thread {
 
     SClient client;
@@ -48,7 +53,7 @@ public class ClientPairingThread extends Thread {
                             Server.SendMessage(this.client, (message));
                             Server.SendMessage(chosenPair,  (message));
                             
-                            //after succeeded pairing, determine the team of the clients which for the chess game(black or white)
+                            //after succeeded pairing, determine the team of the clients which starter for the chess game(black or white)
                             Message clientStartMessage = new Message(Message.MessageTypes.START);
                             clientStartMessage.messageContent = "White";
                             Message pairClientStartMessage = new Message(Message.MessageTypes.START);
@@ -58,7 +63,8 @@ public class ClientPairingThread extends Thread {
                             break;
                         }
                     }
-                    //do not try anytime this operation. Just every second is enough. So sleep...
+                    //do not try anytime this operation. Just every second is enough. Do not need to control is there a client want to pair
+                    //in any time. Every second is more optimized solution.So sleep 1 second...
                     sleep(1000);
                     
                     

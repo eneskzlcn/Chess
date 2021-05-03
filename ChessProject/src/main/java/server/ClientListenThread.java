@@ -15,6 +15,10 @@ import java.util.logging.Logger;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+// The purpose of this thread is listening data incoming to the sclients input stream. After a data come this thread determines what will
+// going to do with this data and then recontinue to the listening the input stream. This listening never ends until the sclient connection
+// is lost...
 public class ClientListenThread extends Thread {
 
     SClient client;
