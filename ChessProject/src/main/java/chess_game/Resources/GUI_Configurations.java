@@ -16,7 +16,7 @@ import java.awt.FlowLayout;
 public class GUI_Configurations {
 
     public static int SCREEN_WIDTH = 600;
-    public static int SCREEN_HEIGHT = 800;
+    public static int SCREEN_HEIGHT = 700;
     public static int TILE_HEIGHT = 64;
     public static int TILE_WIDTH = 64;
     public static Dimension TILE_DIMENSION = new Dimension(TILE_WIDTH, TILE_HEIGHT);

@@ -91,7 +91,7 @@ public class TilePanel extends JPanel {
                             if (move.getKilledPiece().getType() == PieceTypes.KING) {
                                 Team winnerTeam;
                                 winnerTeam = (move.getKilledPiece().getTeam() == Team.BLACK) ? Team.WHITE : Team.BLACK;
-                                JOptionPane.showMessageDialog(null, "Kazanan takım: " + winnerTeam.toString());
+                                JOptionPane.showMessageDialog(null, "Winner: " + winnerTeam.toString());
                                 Message message = new Message(Message.MessageTypes.END);
                                 message.content = null;
                                 client.Send(message);

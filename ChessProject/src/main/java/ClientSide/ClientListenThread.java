@@ -80,7 +80,7 @@ public class ClientListenThread extends Thread {
                             {
                                 Team winnerTeam;
                                 winnerTeam = (move.getKilledPiece().getTeam() == Team.BLACK) ? Team.WHITE : Team.BLACK;
-                                JOptionPane.showMessageDialog(null, "Kazanan takım: " + winnerTeam.toString());
+                                JOptionPane.showMessageDialog(null, "Winner: " + winnerTeam.toString());
                                 Message message = new Message(Message.MessageTypes.END);
                                 message.content = null;
                                 client.Send(message);
@@ -96,6 +96,11 @@ public class ClientListenThread extends Thread {
                         Team checkStateTeam = (Team) msg.content;
                         JOptionPane.showMessageDialog(null, "Check state for team: " +checkStateTeam.toString());
                         break;
+                    
+                    case LEAVE:
+                        JOptionPane.showMessageDialog(null, "Enemy left. Returning to the Menu.");
+                        this.client.game.getGameFrame().remove(this.client.game.getBoardPanel());
+                        this.client.game.createMainMenu();               
                 }
 
             } catch (IOException ex) {
