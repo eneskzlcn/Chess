@@ -6,21 +6,15 @@ package chess_game.gui;
 import ClientSide.Client;
 import Messages.Message;
 import chess_game.Boards.Board;
-import chess_game.Pieces.PieceTypes;
+
 import chess_game.Pieces.Team;
-import chess_game.Resources.BOARD_Configurations;
 import chess_game.Resources.GUI_Configurations;
-import chess_game.Resources.PIECE_Configurations;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  *
@@ -97,7 +91,7 @@ public class Table {
             this.bottomGameMenu.getTurnLBL().setText("Enemy Turn");
             this.bottomGameMenu.getTurnLBL().setForeground(Color.RED);
         }
-        this.bottomGameMenu.getAnaMenuBTN().addActionListener(new ActionListener() {
+        this.bottomGameMenu.getBackToMenuBTN().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameFrame.remove(boardPanel);
