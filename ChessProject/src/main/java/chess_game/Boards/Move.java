@@ -70,5 +70,9 @@ public class Move implements java.io.Serializable{
     public void setKilledPiece(Piece killedPiece) {
         this.killedPiece = killedPiece;
     }
-
+    
+    public boolean hasKilledPiece()
+    {
+       return this.killedPiece == null;
+    }
 }
