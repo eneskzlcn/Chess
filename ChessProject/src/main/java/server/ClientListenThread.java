@@ -45,6 +45,10 @@ public class ClientListenThread extends Thread {
                     case CHECK:
                         this.client.pair.Send(msg);
                         break;
+                    case END:
+                        this.client.isPaired= false;
+                        this.client.isWantToPair = false;
+                        this.client.pair = null;
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ClientListenThread.class.getName()).log(Level.SEVERE, null, ex);

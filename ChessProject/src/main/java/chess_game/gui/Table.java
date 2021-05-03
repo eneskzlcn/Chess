@@ -58,7 +58,7 @@ public class Table {
                     mainMenu.getInfoLBL().setText("Matching...");
                     mainMenu.getPlayBTN().setEnabled(false);
                     Message msg = new Message(Message.MessageTypes.PAIRING);
-                    msg.messageContent = "ESLESME";
+                    msg.content = "ESLESME";
                     client.Send(msg);
                 }
                 if (client.isPaired == true) {

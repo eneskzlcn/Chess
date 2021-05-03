@@ -8,6 +8,7 @@ import ClientSide.*;
 import Messages.MovementMessage;
 import chess_game.Boards.Board;
 import chess_game.Move.Move;
+import chess_game.Pieces.PieceTypes;
 import chess_game.Pieces.Team;
 import chess_game.Player.Player;
 import java.awt.Color;
@@ -40,7 +41,7 @@ public class ClientListenThread extends Thread {
                 Message msg = (Message) (this.client.sInput.readObject());
                 switch (msg.type) {
                     case START:
-                        Team serverChosenTeam = (Team) msg.messageContent;
+                        Team serverChosenTeam = (Team) msg.content;
                         this.client.setTeam(serverChosenTeam);
                         break;
                     case PAIRING:
@@ -52,7 +53,7 @@ public class ClientListenThread extends Thread {
                     case MOVE:
                         /* when we read move object directly we need to to this changes to make the references true...
 
-                        Move enemyMove = (Move)(msg.messageContent);
+                        Move enemyMove = (Move)(msg.content);
                         Player player = this.client.game.getChessBoard().getCurrentPlayer();
                         enemyMove.setBoard(this.client.game.getChessBoard());
                         enemyMove.setCurrentTile(this.client.game.getChessBoard().getTile(enemyMove.getCurrentTile().getCoordinate()));
@@ -67,19 +68,32 @@ public class ClientListenThread extends Thread {
                          */
 
                         //when we use the movement message, these part is enough to know what enemy move.
-                        MovementMessage movement = (MovementMessage) msg.messageContent;
+                        MovementMessage movement = (MovementMessage) msg.content;
                         Board board = this.client.game.getChessBoard();
                         Player player = board.getCurrentPlayer();
                         Move move = new Move(board, board.getTile(movement.currentCoordinate), board.getTile(movement.destinationCoordinate));
                         player.makeMove(board, move);
                         this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
+                        if(move.hasKilledPiece())
+                        {
+                            if(move.getKilledPiece().getType() == PieceTypes.KING)
+                            {
+                                Team winnerTeam;
+                                winnerTeam = (move.getKilledPiece().getTeam() == Team.BLACK) ? Team.WHITE : Team.BLACK;
+                                JOptionPane.showMessageDialog(null, "Kazanan takım: " + winnerTeam.toString());
+                                Message message = new Message(Message.MessageTypes.END);
+                                message.content = null;
+                                client.Send(message);
+                                break;
+                            }
+                        }
                         board.changeCurrentPlayer();
                         this.client.game.getBottomGameMenu().getTurnLBL().setText("Your Turn");
                         this.client.game.getBottomGameMenu().getTurnLBL().setForeground(Color.GREEN);
                         break;
                     case CHECK:
                         //if any check state comes to client. Write information to the connected menu object.
-                        Team checkStateTeam = (Team) msg.messageContent;
+                        Team checkStateTeam = (Team) msg.content;
                         JOptionPane.showMessageDialog(null, "Check state for team: " +checkStateTeam.toString());
                         break;
                 }

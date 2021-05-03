@@ -50,15 +50,15 @@ public class ClientPairingThread extends Thread {
                             this.client.isPaired = true;
                             //giving information to the clients about the success on pairing3
                             Message message = new Message(Message.MessageTypes.PAIRING);
-                            message.messageContent = "Eşleştin";
+                            message.content = "Eşleştin";
                             Server.SendMessage(this.client, (message));
                             Server.SendMessage(chosenPair,  (message));
                             
                             //after succeeded pairing, determine the team of the clients which starter for the chess game(black or white)
                             Message clientStartMessage = new Message(Message.MessageTypes.START);
-                            clientStartMessage.messageContent = (Object)Team.WHITE;
+                            clientStartMessage.content = (Object)Team.WHITE;
                             Message pairClientStartMessage = new Message(Message.MessageTypes.START);
-                            pairClientStartMessage.messageContent = (Object)Team.BLACK;
+                            pairClientStartMessage.content = (Object)Team.BLACK;
                             Server.SendMessage(this.client, clientStartMessage);
                             Server.SendMessage(chosenPair,pairClientStartMessage);
                             break;

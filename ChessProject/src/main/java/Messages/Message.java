@@ -12,11 +12,11 @@ package Messages;
 public class Message implements java.io.Serializable {
 
     public static enum MessageTypes {
-        MATCHED, START, MOVE, END, PAIRING, CHECK
+        MATCHED, START, MOVE, END, PAIRING, CHECK,
     };
 
     public MessageTypes type;
-    public Object messageContent;
+    public Object content;
 
     public Message(MessageTypes type) {
         this.type = type;
