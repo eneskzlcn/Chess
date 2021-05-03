@@ -14,6 +14,8 @@ import java.util.List;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+//This are the pieces of chess. They have type ( KING, QUEEN or sth.) and team (WHITE,BLACK)...
 public abstract class Piece implements java.io.Serializable{
 
     private boolean killed = false;

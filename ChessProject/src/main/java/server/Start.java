@@ -12,7 +12,9 @@ import java.util.logging.Logger;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
-public class Test {
+
+// This is the main class of server to start the server.
+public class Start {
 
     public static void main(String[] args) {
         Server server = new Server(4000);
@@ -24,7 +26,7 @@ public class Test {
                 System.out.println("Ben burada bekliyorum."+Server.clients.size()+" clientim var.");
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

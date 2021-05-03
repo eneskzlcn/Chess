@@ -12,6 +12,9 @@ import chess_game.Pieces.Piece;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+//A Tile is every single square that sits on board. Which has a x , y values (Coordinate) 
+// and keeps a piece (or not) in it.
 public class Tile implements java.io.Serializable{
 
     private Piece piece;

@@ -21,6 +21,8 @@ import java.util.List;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+// This class is the visual version of the Board object.
 public class BoardPanel extends JPanel {
 
     private TilePanel boardTiles[][];

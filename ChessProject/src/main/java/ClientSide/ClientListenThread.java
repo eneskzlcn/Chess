@@ -24,6 +24,8 @@ import javax.swing.JOptionPane;
  
   @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+//The purpose of this thread is listening the server continiously if there is a message incoming to our input stream.
+// İf there is a message, then decide what will be happen.
 public class ClientListenThread extends Thread {
 
     Client client;
@@ -74,10 +76,8 @@ public class ClientListenThread extends Thread {
                         Move move = new Move(board, board.getTile(movement.currentCoordinate), board.getTile(movement.destinationCoordinate));
                         player.makeMove(board, move);
                         this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
-                        if(move.hasKilledPiece())
-                        {
-                            if(move.getKilledPiece().getType() == PieceTypes.KING)
-                            {
+                        if (move.hasKilledPiece()) {
+                            if (move.getKilledPiece().getType() == PieceTypes.KING) {
                                 Team winnerTeam;
                                 winnerTeam = (move.getKilledPiece().getTeam() == Team.BLACK) ? Team.WHITE : Team.BLACK;
                                 JOptionPane.showMessageDialog(null, "Winner: " + winnerTeam.toString());
@@ -94,13 +94,13 @@ public class ClientListenThread extends Thread {
                     case CHECK:
                         //if any check state comes to client. Write information to the connected menu object.
                         Team checkStateTeam = (Team) msg.content;
-                        JOptionPane.showMessageDialog(null, "Check state for team: " +checkStateTeam.toString());
+                        JOptionPane.showMessageDialog(null, "Check state for team: " + checkStateTeam.toString());
                         break;
-                    
+
                     case LEAVE:
                         JOptionPane.showMessageDialog(null, "Enemy left. Returning to the Menu.");
                         this.client.game.getGameFrame().remove(this.client.game.getBoardPanel());
-                        this.client.game.createMainMenu();               
+                        this.client.game.createMainMenu();
                 }
 
             } catch (IOException ex) {

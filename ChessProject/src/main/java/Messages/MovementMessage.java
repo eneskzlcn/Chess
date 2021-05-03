@@ -11,6 +11,10 @@ import chess_game.Pieces.Coordinate;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+//This class created for optimizated transformation speed. Because the move class
+//has many reference on it and very heavy. Just keeping coordinates and isKilled value
+// is enough to understood what rival player moved last round.
 public class MovementMessage implements java.io.Serializable{
     public boolean isPieceKilled;
     public Coordinate destinationCoordinate;

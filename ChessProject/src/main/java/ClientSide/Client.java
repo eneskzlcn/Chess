@@ -20,6 +20,8 @@ import java.util.logging.Logger;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+// The client which will be connect to server and play chess.
 public class Client {
 
     public Socket socket;

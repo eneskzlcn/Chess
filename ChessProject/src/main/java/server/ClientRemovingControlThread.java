@@ -9,6 +9,9 @@ package Server;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+// The purpose of this class is control the clients anytime.If any client
+//lost the connection to the server but still in arraylist which keeps sclients in server,
+//remove them from list.
 public class ClientRemovingControlThread extends Thread{
 
     private Server server;

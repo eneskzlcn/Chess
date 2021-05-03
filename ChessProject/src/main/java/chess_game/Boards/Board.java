@@ -9,12 +9,16 @@ import chess_game.Pieces.*;
 import chess_game.Player.Player;
 import chess_game.Resources.*;
 import chess_game.Utilities.BoardUtilities;
-import javax.swing.JPanel;
 
 /**
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+//The purpose of this class is keeping the tiles (which are empty or keeping a piece). Actually this class
+// is the abstract board that pieces are sit on. Not have visualization. 
+//The all board you see is the visualized version of this board.
+
 public class Board implements java.io.Serializable{
 
     private final Tile[][] tiles;

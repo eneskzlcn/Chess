@@ -32,6 +32,7 @@ import javax.swing.JOptionPane;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+//This class is the visual version of every Tile class in Board class
 public class TilePanel extends JPanel {
 
     Coordinate coordinate;

@@ -9,6 +9,9 @@ package Messages;
  *
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
+
+//This class' purpose is providing a generic cominication object for us to
+// send any serializable objects to the server.
 public class Message implements java.io.Serializable {
 
     public static enum MessageTypes {
