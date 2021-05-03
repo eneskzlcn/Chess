@@ -28,7 +28,6 @@ public class ClientPairingThread extends Thread {
             try {
                 // take one client to here ==> acquire 1 permit
                 Server.pairingLockForTwoPair.acquire(1);
-                System.out.println("Pairing thread aktif oldu.");
                 //matching system starts to matching clients.
                 SClient chosenPair = null;
                 //while the client is connected and not have pair try this to match him.
@@ -64,7 +63,7 @@ public class ClientPairingThread extends Thread {
                     
                     
                 }
-                Server.pairingLockForTwoPair.release();
+                Server.pairingLockForTwoPair.release(1);
             } catch (InterruptedException ex) {
                 System.out.println("Pairing thread could not been acquired 1 permit. There is an error occured there.");
             }
