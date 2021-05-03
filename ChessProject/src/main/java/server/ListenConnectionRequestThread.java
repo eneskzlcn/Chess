@@ -5,18 +5,13 @@
  */
 package Server;
 
-import Messages.Message;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /*
- *
- * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
+   @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
 
 // this thread called by server directly when the server opens and never closes. The purpose of this
@@ -40,7 +35,7 @@ public class ListenConnectionRequestThread extends Thread {
                 server.clients.add(nClient);
                 
             } catch (IOException ex) {
-                Logger.getLogger(ListenConnectionRequestThread.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("There is an error occured when the new client being accepted.");
             }
         }
     }
