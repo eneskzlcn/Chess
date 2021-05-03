@@ -39,6 +39,10 @@ public class ClientListenThread extends Thread {
 
                 Message msg = (Message) (this.client.sInput.readObject());
                 switch (msg.type) {
+                    case START:
+                        Team serverChosenTeam = (Team) msg.messageContent;
+                        this.client.setTeam(serverChosenTeam);
+                        break;
                     case PAIRING:
                         this.client.isPaired = true;
                         this.client.game.getMainMenu().getPlayBTN().setEnabled(true);
@@ -71,9 +75,8 @@ public class ClientListenThread extends Thread {
                         this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
                         board.changeCurrentPlayer();
                         break;
-                    
+
                 }
-               
 
             } catch (IOException ex) {
                 Logger.getLogger(ClientListenThread.class.getName()).log(Level.SEVERE, null, ex);

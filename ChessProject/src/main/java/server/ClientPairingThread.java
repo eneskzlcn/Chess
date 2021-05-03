@@ -6,6 +6,7 @@
 package Server;
 
 import Messages.Message;
+import chess_game.Pieces.Team;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,9 +56,9 @@ public class ClientPairingThread extends Thread {
                             
                             //after succeeded pairing, determine the team of the clients which starter for the chess game(black or white)
                             Message clientStartMessage = new Message(Message.MessageTypes.START);
-                            clientStartMessage.messageContent = "White";
+                            clientStartMessage.messageContent = (Object)Team.WHITE;
                             Message pairClientStartMessage = new Message(Message.MessageTypes.START);
-                            pairClientStartMessage.messageContent = "Black";
+                            pairClientStartMessage.messageContent = (Object)Team.BLACK;
                             Server.SendMessage(this.client, clientStartMessage);
                             Server.SendMessage(chosenPair,pairClientStartMessage);
                             break;
@@ -69,6 +70,7 @@ public class ClientPairingThread extends Thread {
                     
                     
                 }
+                // after a completed pairing for a sclient. Release the lock to let other clients match with each other.
                 Server.pairingLockForTwoPair.release(1);
             } catch (InterruptedException ex) {
                 System.out.println("Pairing thread could not been acquired 1 permit. There is an error occured there.");
