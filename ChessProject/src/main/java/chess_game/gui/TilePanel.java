@@ -7,6 +7,7 @@ package chess_game.gui;
 
 import ClientSide.Client;
 import Messages.Message;
+import Messages.MovementMessage;
 import chess_game.Boards.Board;
 import chess_game.Boards.Tile;
 import chess_game.Pieces.Coordinate;
@@ -38,7 +39,7 @@ public class TilePanel extends JPanel {
     Coordinate coordinate;
     JLabel pieceIcon;
 
-    public TilePanel(BoardPanel boardPanel, Coordinate coord, Board chessBoard,Client client) {
+    public TilePanel(BoardPanel boardPanel, Coordinate coord, Board chessBoard, Client client) {
         super(new GridBagLayout());
         this.coordinate = coord;
         pieceIcon = new JLabel();
@@ -49,34 +50,54 @@ public class TilePanel extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(client.getTeam() != chessBoard.getCurrentPlayer().getTeam())
-                {
+                if (client.getTeam() != chessBoard.getCurrentPlayer().getTeam()) {
                     return;
                 }
+
                 if (!chessBoard.hasChosenTile()) { // if there is no chosen piece . Then make this piece chosen...
+                    if (chessBoard.getTile(coordinate).hasPiece()) {
+                        if (chessBoard.getCurrentPlayer().getTeam() != chessBoard.getTile(coordinate).getPiece().getTeam()) {
+                            return;
+                        }
+                    }
+
                     chessBoard.setChosenTile(chessBoard.getTile(coordinate));
 
                 } else {
                     Tile destinationTile = chessBoard.getTile(coordinate); // if there is already a chosen piece then this tile will be destinatin place
                     if (MoveUtilities.isValidMove(chessBoard, destinationTile)) {
-                        Move move = new Move(chessBoard,chessBoard.getChosenTile(),destinationTile);
+                        Move move = new Move(chessBoard, chessBoard.getChosenTile(), destinationTile);
                         chessBoard.getCurrentPlayer().makeMove(chessBoard, move);
-                        Message movementMessage = new Message(Message.MessageTypes.MOVE);
-                        movementMessage.messageContent = (Object)(move);
-                        client.Send(movementMessage);
+                        //the time when we send move class directly we using this code.
+//                        Message movementMessage = new Message(Message.MessageTypes.MOVE);
+//                        movementMessage.messageContent = (Object) (move);
+//                        client.Send(movementMessage);
+                        //instead of send move classs directly we just send the coordinates of the tiles (current,destination) in  MovementMessage object
+                        Message msg = new Message(Message.MessageTypes.MOVE);
+                        MovementMessage movement = new MovementMessage();
+                        movement.currentCoordinate = move.getCurrentTile().getCoordinate();
+                        movement.destinationCoordinate = move.getDestinationTile().getCoordinate();
+                        if(move.getKilledPiece() != null)
+                        {
+                            movement.isPieceKilled = true;
+                        }
+                        msg.messageContent = (Object)movement;
+                        client.Send(msg);
                         chessBoard.changeCurrentPlayer();
-                        
+
                     } else {
+                        if (destinationTile.hasPiece()) {
+                            if (chessBoard.getCurrentPlayer().getTeam() != chessBoard.getTile(coordinate).getPiece().getTeam()) {
+                                return;
+                            }
+                        }
                         chessBoard.setChosenTile(destinationTile);
 
                     }
-                    if(MoveUtilities.controlCheckState(chessBoard, Team.BLACK))
-                        {
-                            System.out.println("Check state for team:"+Team.BLACK.toString());
-                        }
-                    else if(MoveUtilities.controlCheckState(chessBoard, Team.WHITE))
-                    {
-                        System.out.println("Check state for team:"+Team.WHITE.toString());
+                    if (MoveUtilities.controlCheckState(chessBoard, Team.BLACK)) {
+                        System.out.println("Check state for team:" + Team.BLACK.toString());
+                    } else if (MoveUtilities.controlCheckState(chessBoard, Team.WHITE)) {
+                        System.out.println("Check state for team:" + Team.WHITE.toString());
                     }
                 }
                 boardPanel.updateBoardGUI(chessBoard);
@@ -116,20 +137,18 @@ public class TilePanel extends JPanel {
         if (thisTile == null) {
             System.out.println("Tile is null");
             return;
-            
+
         }
         if (thisTile.hasPiece()) {
             //JLabel pieceIcon = new JLabel(BoardUtilities.getImageOfTeamPiece(thisTile.getPiece().getTeam(), thisTile.getPiece().getType()));
             //this.add(pieceIcon);
             pieceIcon.setIcon(BoardUtilities.getImageOfTeamPiece(thisTile.getPiece().getTeam(), thisTile.getPiece().getType()));
             pieceIcon.validate();
-        }
-        else if (!thisTile.hasPiece())
-        {
+        } else if (!thisTile.hasPiece()) {
             pieceIcon.setIcon(null);
             pieceIcon.validate();
         }
-        
+
         //this.add(pieceIcon);
     }
 
