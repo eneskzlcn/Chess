@@ -38,43 +38,42 @@ public class ClientListenThread extends Thread {
             try {
 
                 Message msg = (Message) (this.client.sInput.readObject());
-                if (msg.type == Message.MessageTypes.PAIRING) {
-                    this.client.isPaired = true;
-                    this.client.game.getMainMenu().getPlayBTN().setEnabled(true);
-                    this.client.game.getMainMenu().getPlayBTN().setText("Start Game");
-                    this.client.game.getMainMenu().getInfoLBL().setText("Matched. Click To Start Game");
-                } else if (msg.type == Message.MessageTypes.START) {
-                    if ((msg.messageContent).equals("Black")) {
-                        this.client.setTeam(Team.BLACK);
+                switch (msg.type) {
+                    case PAIRING:
+                        this.client.isPaired = true;
+                        this.client.game.getMainMenu().getPlayBTN().setEnabled(true);
+                        this.client.game.getMainMenu().getPlayBTN().setText("Start Game");
+                        this.client.game.getMainMenu().getInfoLBL().setText("Matched. Click To Start Game");
+                        break;
+                    case MOVE:
+                        /* when we read move object directly we need to to this changes to make the references true...
 
-                    } else if ((msg.messageContent).equals("White")) {
-                        this.client.setTeam(Team.WHITE);
-                    }
-                } else if (msg.type == Message.MessageTypes.MOVE) {
+                        Move enemyMove = (Move)(msg.messageContent);
+                        Player player = this.client.game.getChessBoard().getCurrentPlayer();
+                        enemyMove.setBoard(this.client.game.getChessBoard());
+                        enemyMove.setCurrentTile(this.client.game.getChessBoard().getTile(enemyMove.getCurrentTile().getCoordinate()));
+                        enemyMove.setDestinationTile(this.client.game.getChessBoard().getTile(enemyMove.getDestinationTile().getCoordinate()));
+                        if(enemyMove.getKilledPiece() != null)
+                        {
+                            enemyMove.setKilledPiece(this.client.game.getChessBoard().getTile(enemyMove.getDestinationTile().getCoordinate()).getPiece());
+                        }
+                        player.makeMove(this.client.game.getChessBoard(), enemyMove);
+                        this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
+                        this.client.game.getChessBoard().changeCurrentPlayer(); 
+                         */
+
+                        //when we use the movement message, these part is enough to know what enemy move.
+                        MovementMessage movement = (MovementMessage) msg.messageContent;
+                        Board board = this.client.game.getChessBoard();
+                        Player player = board.getCurrentPlayer();
+                        Move move = new Move(board, board.getTile(movement.currentCoordinate), board.getTile(movement.destinationCoordinate));
+                        player.makeMove(board, move);
+                        this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
+                        board.changeCurrentPlayer();
+                        break;
                     
-                    //when we read move object directly we need to to this changes to make the references true...
-                    
-//                    Move enemyMove = (Move)(msg.messageContent);
-//                    Player player = this.client.game.getChessBoard().getCurrentPlayer();
-//                    enemyMove.setBoard(this.client.game.getChessBoard());
-//                    enemyMove.setCurrentTile(this.client.game.getChessBoard().getTile(enemyMove.getCurrentTile().getCoordinate()));
-//                    enemyMove.setDestinationTile(this.client.game.getChessBoard().getTile(enemyMove.getDestinationTile().getCoordinate()));
-//                    if(enemyMove.getKilledPiece() != null)
-//                    {
-//                        enemyMove.setKilledPiece(this.client.game.getChessBoard().getTile(enemyMove.getDestinationTile().getCoordinate()).getPiece());
-//                    }
-//                    player.makeMove(this.client.game.getChessBoard(), enemyMove);
-//                    this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
-//                    this.client.game.getChessBoard().changeCurrentPlayer();
-                    //when we use the movement message, these part is enough to know what enemy move.
-                    MovementMessage movement = (MovementMessage) msg.messageContent;
-                    Board board = this.client.game.getChessBoard();
-                    Player player = board.getCurrentPlayer();
-                    Move move = new Move(board, board.getTile(movement.currentCoordinate), board.getTile(movement.destinationCoordinate));
-                    player.makeMove(board, move);
-                    this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
-                    board.changeCurrentPlayer();
                 }
+               
 
             } catch (IOException ex) {
                 Logger.getLogger(ClientListenThread.class.getName()).log(Level.SEVERE, null, ex);

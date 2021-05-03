@@ -29,14 +29,15 @@ public class ClientListenThread extends Thread {
             
             try {
                 Message msg = (Message)(this.client.cInput.readObject());
-                if(msg.type == Message.MessageTypes.PAIRING)
+                switch(msg.type)
                 {
-                    this.client.isWantToPair = true;
-                    this.client.pairingThread.start();
-                }
-                if(msg.type == Message.MessageTypes.MOVE)
-                {
-                    this.client.pair.Send(msg);
+                    case PAIRING:
+                        this.client.isWantToPair = true;
+                        this.client.pairingThread.start();
+                        break;
+                    case MOVE:
+                        this.client.pair.Send(msg);
+                        break;   
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ClientListenThread.class.getName()).log(Level.SEVERE, null, ex);
