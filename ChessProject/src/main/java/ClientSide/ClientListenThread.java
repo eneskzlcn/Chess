@@ -10,6 +10,7 @@ import chess_game.Boards.Board;
 import chess_game.Move.Move;
 import chess_game.Pieces.Team;
 import chess_game.Player.Player;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /*
@@ -73,6 +74,8 @@ public class ClientListenThread extends Thread {
                         player.makeMove(board, move);
                         this.client.game.getBoardPanel().updateBoardGUI(this.client.game.getChessBoard());
                         board.changeCurrentPlayer();
+                        this.client.game.getBottomGameMenu().getTurnLBL().setText("Your Turn");
+                        this.client.game.getBottomGameMenu().getTurnLBL().setForeground(Color.GREEN);
                         break;
                     case CHECK:
                         //if any check state comes to client. Write information to the connected menu object.

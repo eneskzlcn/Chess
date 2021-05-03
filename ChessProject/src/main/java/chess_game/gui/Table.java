@@ -12,6 +12,7 @@ import chess_game.Resources.BOARD_Configurations;
 import chess_game.Resources.GUI_Configurations;
 import chess_game.Resources.PIECE_Configurations;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -85,7 +86,24 @@ public class Table {
         this.chessBoard = new Board();
         this.boardPanel = new BoardPanel(this.chessBoard, this.client);
         this.bottomGameMenu = new InGameBottomMenu();
-        this.bottomGameMenu.getPlayersColorLBL().setText("Your color is" + this.client.getTeam());
+        this.bottomGameMenu.getPlayersColorLBL().setText("Your color is " + this.client.getTeam().toString());
+        if(this.client.getTeam() == Team.WHITE)
+        {
+            this.bottomGameMenu.getTurnLBL().setText("Your Turn");
+            this.bottomGameMenu.getTurnLBL().setForeground(Color.GREEN);
+        }
+        else
+        {
+            this.bottomGameMenu.getTurnLBL().setText("Enemy Turn");
+            this.bottomGameMenu.getTurnLBL().setForeground(Color.RED);
+        }
+        this.bottomGameMenu.getAnaMenuBTN().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameFrame.remove(boardPanel);
+                createMainMenu();
+            }
+        });
         this.gameFrame.add(boardPanel);
         this.gameFrame.add(this.boardPanel, BorderLayout.CENTER);
         this.gameFrame.add(this.bottomGameMenu, BorderLayout.PAGE_END);
