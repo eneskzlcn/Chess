@@ -14,7 +14,7 @@ import chess_game.Pieces.*;
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
 
-
+//The player which is making moves on board. They have team also black or white.
 public class Player implements java.io.Serializable{
     
     private Team team;

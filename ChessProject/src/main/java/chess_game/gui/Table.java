@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
  * @author Enes Kızılcın <nazifenes.kizilcin@stu.fsm.edu.tr>
  */
 // Table is the composition class that have all the game data in it and controls every object.
+
 public class Table {
 
     private JFrame gameFrame;
